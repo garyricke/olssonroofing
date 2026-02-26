@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Olsson Roofing — Illinois's Largest Commercial Roofing Contractor Since 1914</title>
+  <meta name="description" content="Olsson Roofing Company is the largest commercial roofing contractor in Illinois. 110+ years of institutional-grade safety, 200+ projects/year, 24/7 service. Aurora & Romeoville, IL." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #E9322E;
+      --brick: #802B26;
+      --charcoal: #161616;
+      --slate: #333333;
+      --red-soft: #F0706D;
+      --red-fog: #FCE0E0;
+      --white: #ffffff;
+      --light: #f7f7f7;
+      --border: #e2e2e2;
+      --font-head: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--charcoal); background: var(--white); line-height: 1.6; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
+
+    /* ── UTILITY ─────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+    .section-title { font-family: var(--font-head); font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.1; color: var(--charcoal); }
+    .section-title--light { color: var(--white); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 3px; font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: all 0.2s ease; }
+    /* Nav-specific button override — keeps it compact in the header */
+    #nav .btn { padding: 10px 18px; font-size: 12px; }
+    .btn-primary { background: var(--red); color: var(--white); }
+    .btn-primary:hover { background: var(--brick); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid var(--white); }
+    .btn-outline:hover { background: var(--white); color: var(--charcoal); }
+    .btn-outline-dark { background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); }
+    .btn-outline-dark:hover { background: var(--charcoal); color: var(--white); }
+
+    /* ── NAV ─────────────────────────────────────── */
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); transition: box-shadow 0.2s; }
+    #nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+    .nav-logo img { height: 34px; width: auto; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--slate); transition: color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .nav-emergency { font-family: var(--font-head); font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--charcoal); transition: all 0.2s; }
+
+    /* ── HERO ─────────────────────────────────────── */
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; margin-top: 72px; }
+    .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+    .hero-bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(22,22,22,0.82) 0%, rgba(22,22,22,0.55) 60%, rgba(22,22,22,0.3) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: var(--white); font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 2px; margin-bottom: 20px; }
+    .hero-title { font-family: var(--font-head); font-size: clamp(36px, 5.5vw, 70px); font-weight: 900; line-height: 1.0; color: var(--white); margin-bottom: 20px; }
+    .hero-title span { color: var(--red); }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.85); line-height: 1.65; margin-bottom: 36px; max-width: 520px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.6); font-size: 11px; font-family: var(--font-head); letter-spacing: 0.1em; text-transform: uppercase; z-index: 2; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+    /* ── STATS BAR ────────────────────────────────── */
+    #stats { background: var(--charcoal); padding: 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 28px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-head); font-size: clamp(32px, 4vw, 48px); font-weight: 900; color: var(--red); line-height: 1; }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 6px; font-weight: 500; }
+
+    /* ── SERVICES ─────────────────────────────────── */
+    #services { padding: 100px 0; background: var(--white); }
+    .services-intro { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+    .services-intro p { color: var(--slate); margin-top: 16px; font-size: 17px; }
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); border: 2px solid var(--border); }
+    .service-card { background: var(--white); position: relative; overflow: hidden; cursor: pointer; transition: all 0.25s; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); z-index: 2; }
+    .service-card:hover .service-arrow { background: var(--red); color: var(--white); }
+    .service-img { width: 100%; height: 260px; object-fit: cover; }
+    .service-body { padding: 28px 32px; }
+    .service-tag { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .service-title { font-family: var(--font-head); font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 10px; }
+    .service-desc { font-size: 14px; color: var(--slate); line-height: 1.65; margin-bottom: 20px; }
+    .service-arrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); border: 2px solid var(--charcoal); padding: 10px 18px; border-radius: 2px; transition: all 0.2s; }
+
+    /* ── WHY OLSSON ───────────────────────────────── */
+    #why { padding: 100px 0; background: var(--light); }
+    .why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-image { position: relative; }
+    .why-image img { width: 100%; height: 520px; object-fit: cover; border-radius: 2px; }
+    .why-badge { position: absolute; bottom: -24px; right: -24px; background: var(--red); color: var(--white); padding: 28px 32px; text-align: center; }
+    .why-badge-num { font-family: var(--font-head); font-size: 48px; font-weight: 900; line-height: 1; }
+    .why-badge-label { font-size: 12px; font-weight: 600; opacity: 0.9; margin-top: 4px; }
+    .why-content p { color: var(--slate); margin: 16px 0 32px; font-size: 16px; line-height: 1.75; }
+    .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
+    .pillar { display: flex; gap: 14px; align-items: flex-start; }
+    .pillar-icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--red-fog); border-radius: 2px; display: flex; align-items: center; justify-content: center; color: var(--red); }
+    .pillar-text h4 { font-family: var(--font-head); font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .pillar-text p { font-size: 13px; color: var(--slate); line-height: 1.5; }
+
+    /* ── MISSION CRITICAL ─────────────────────────── */
+    #mission { padding: 0; background: var(--charcoal); overflow: hidden; }
+    .mission-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+    .mission-img { position: relative; overflow: hidden; }
+    .mission-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; }
+    .mission-content { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .mission-content .section-label { color: var(--red-soft); }
+    .mission-content .section-title { color: var(--white); margin-bottom: 32px; }
+    .mission-cards { display: flex; flex-direction: column; gap: 20px; }
+    .mission-card { border-left: 3px solid var(--red); padding-left: 18px; }
+    .mission-card h4 { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    .mission-card p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+    .mission-cta { margin-top: 36px; }
+
+    /* ── SAFETY ───────────────────────────────────── */
+    #safety { padding: 100px 0; background: var(--white); }
+    .safety-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .safety-images { position: relative; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; }
+    .safety-images img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .safety-images .img-main { grid-column: 1 / 3; height: 300px; }
+    .safety-images .img-sm { height: 220px; }
+    .safety-stat-bubble { position: absolute; bottom: -24px; left: 32px; background: var(--red); color: var(--white); padding: 20px 28px; z-index: 2; }
+    .safety-stat-bubble .num { font-family: var(--font-head); font-size: 38px; font-weight: 900; line-height: 1; }
+    .safety-stat-bubble .lbl { font-size: 12px; font-weight: 600; opacity: 0.9; margin-top: 3px; }
+    .safety-content { padding: 0 0 0 72px; display: flex; flex-direction: column; justify-content: center; }
+    .safety-content p { color: var(--slate); margin: 16px 0 28px; font-size: 16px; line-height: 1.75; }
+    .safety-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    .safety-metric { background: var(--light); padding: 20px; border-left: 3px solid var(--red); }
+    .safety-metric .m-num { font-family: var(--font-head); font-size: 28px; font-weight: 900; color: var(--charcoal); line-height: 1; }
+    .safety-metric .m-label { font-size: 12px; color: var(--slate); margin-top: 4px; line-height: 1.4; }
+    .safety-events { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .safety-event-tag { display: flex; align-items: center; gap: 8px; background: var(--light); border: 1px solid var(--border); padding: 8px 14px; border-radius: 2px; font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: var(--charcoal); }
+    .safety-event-tag svg { color: var(--red); flex-shrink: 0; }
+    /* Safetyfest banner strip */
+    .safetyfest-strip { background: var(--charcoal); padding: 48px 0; margin-top: 0; }
+    .safetyfest-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; }
+    .safetyfest-img { overflow: hidden; max-height: 360px; }
+    .safetyfest-img img { width: 100%; height: 100%; object-fit: cover; }
+    .safetyfest-text { padding: 48px 56px; display: flex; flex-direction: column; justify-content: center; }
+    .safetyfest-text .section-label { color: var(--red-soft); }
+    .safetyfest-text h3 { font-family: var(--font-head); font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: var(--white); margin: 12px 0 16px; line-height: 1.15; }
+    .safetyfest-text p { font-size: 15px; color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 28px; }
+    .safetyfest-quotes { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .sf-quote { border-left: 2px solid var(--red); padding-left: 14px; font-size: 14px; color: rgba(255,255,255,0.7); font-style: italic; line-height: 1.6; }
+    .sf-quote cite { display: block; font-style: normal; font-family: var(--font-head); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+    @media (max-width: 1024px) {
+      .safety-layout { grid-template-columns: 1fr; gap: 64px; }
+      .safety-content { padding: 0; }
+      .safety-stat-bubble { bottom: -20px; }
+      .safetyfest-inner { grid-template-columns: 1fr; }
+      .safetyfest-img { max-height: 260px; }
+      .safetyfest-text { padding: 36px 32px; }
+    }
+    @media (max-width: 768px) {
+      .safety-metrics { grid-template-columns: 1fr 1fr; }
+      .safety-images .img-main { height: 220px; }
+      .safety-images .img-sm { height: 160px; }
+    }
+
+    /* ── AWARDS ───────────────────────────────────── */
+    #awards { padding: 80px 0; background: var(--white); border-top: 1px solid var(--border); }
+    .awards-header { text-align: center; margin-bottom: 52px; }
+    .awards-header p { color: var(--slate); margin-top: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+    .award-item { background: var(--white); padding: 40px 32px; text-align: center; }
+    .award-icon { width: 52px; height: 52px; background: var(--red-fog); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--red); margin: 0 auto 16px; }
+    .award-title { font-family: var(--font-head); font-size: 16px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; }
+    .award-badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 10px; }
+    .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: var(--red-fog); color: var(--brick); }
+
+    /* ── TESTIMONIALS ─────────────────────────────── */
+    #testimonials { padding: 100px 0; background: var(--light); }
+    .testimonials-header { text-align: center; margin-bottom: 52px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card { background: var(--white); padding: 36px 32px; border-bottom: 3px solid var(--red); }
+    .quote-mark { font-family: var(--font-head); font-size: 64px; line-height: 0.6; color: var(--red); margin-bottom: 20px; }
+    .testimonial-text { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--charcoal); }
+    .testimonial-company { font-size: 12px; color: var(--slate); margin-top: 2px; }
+
+    /* ── VIDEO STORIES ────────────────────────────── */
+    #video-stories { padding: 100px 0; background: var(--charcoal); overflow: hidden; }
+    .vstories-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+    .vstories-header .section-label { color: var(--red-soft); }
+    .vstories-header .section-title { color: var(--white); }
+    .vstories-scroll-wrap { position: relative; }
+    .vstories-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; }
+    .vstories-track::-webkit-scrollbar { display: none; }
+    .vstory-thumb { flex: 0 0 auto; width: 180px; aspect-ratio: 9 / 16; position: relative; border-radius: 4px; overflow: hidden; cursor: pointer; scroll-snap-align: start; background: #111; }
+    .vstory-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: opacity 0.3s; }
+    .vstory-thumb .vstory-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 50%, transparent 100%); transition: background 0.25s; }
+    .vstory-thumb:hover .vstory-overlay { background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 60%, transparent 100%); }
+    .vstory-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 48px; height: 48px; background: rgba(233,50,46,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; transition: transform 0.2s, background 0.2s; }
+    .vstory-thumb:hover .vstory-play { transform: translate(-50%, -50%) scale(1.1); background: var(--red); }
+    .vstory-num { position: absolute; bottom: 10px; left: 12px; font-family: var(--font-head); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; }
+    /* Scroll arrows */
+    .vstories-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s; }
+    .vstories-arrow:hover { background: var(--red); border-color: var(--red); }
+    .vstories-arrow--prev { left: -20px; }
+    .vstories-arrow--next { right: -20px; }
+    /* Video lightbox */
+    #vstory-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    #vstory-lightbox.active { opacity: 1; pointer-events: all; }
+    .vstory-lb-inner { position: relative; width: min(360px, 90vw); aspect-ratio: 9 / 16; background: #000; border-radius: 6px; overflow: hidden; }
+    #vstory-lb-video { width: 100%; height: 100%; object-fit: cover; }
+    .vstory-lb-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; background: rgba(0,0,0,0.6); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s; }
+    .vstory-lb-close:hover { background: var(--red); }
+    .vstory-lb-prev, .vstory-lb-next { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.55); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s; }
+    .vstory-lb-prev { left: -56px; }
+    .vstory-lb-next { right: -56px; }
+    .vstory-lb-prev:hover, .vstory-lb-next:hover { background: var(--red); }
+    @media (max-width: 600px) {
+      .vstory-lb-prev { left: 8px; top: auto; bottom: -52px; transform: none; }
+      .vstory-lb-next { right: 8px; top: auto; bottom: -52px; transform: none; }
+      .vstories-arrow { display: none; }
+      .vstory-thumb { width: 150px; }
+    }
+
+    /* ── NEWS ─────────────────────────────────────── */
+    #news { padding: 100px 0; background: var(--white); }
+    .news-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .news-card { cursor: pointer; }
+    .news-card:hover .news-img-wrap img { transform: scale(1.04); }
+    .news-img-wrap { overflow: hidden; height: 200px; }
+    .news-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .news-body { padding: 20px 0; }
+    .news-date { font-size: 12px; color: var(--red); font-family: var(--font-head); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .news-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--charcoal); line-height: 1.3; margin-bottom: 8px; }
+    .news-excerpt { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+    /* ── SOCIAL STRIP ─────────────────────────────── */
+    #social { padding: 48px 0; background: var(--charcoal); }
+    .social-inner { display: flex; align-items: center; justify-content: center; gap: 48px; }
+    .social-label { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+    .social-links { display: flex; gap: 16px; }
+    .social-link { width: 44px; height: 44px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); transition: all 0.2s; }
+    .social-link:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+
+    /* ── CTA BANNER ───────────────────────────────── */
+    #cta { padding: 80px 0; background: var(--red); }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .cta-text h2 { font-family: var(--font-head); font-size: clamp(24px, 3vw, 38px); font-weight: 900; color: var(--white); }
+    .cta-text p { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 16px; }
+    .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
+    .btn-white { background: var(--white); color: var(--red); }
+    .btn-white:hover { background: var(--red-fog); }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    #footer { background: #0e0e0e; color: rgba(255,255,255,0.75); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand img { height: 36px; filter: brightness(0) invert(1); margin-bottom: 20px; }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); }
+    .footer-tagline { display: inline-block; background: var(--red); color: var(--white); font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 1px; margin-top: 16px; }
+    .footer-col h4 { font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--red); }
+    .footer-contact p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+    .footer-contact a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--red); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
+    .footer-license { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    /* ── MODALS ───────────────────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal { background: var(--white); max-width: 720px; width: 100%; max-height: 90vh; overflow-y: auto; border-radius: 2px; position: relative; transform: translateY(24px); transition: transform 0.25s; }
+    .modal-overlay.active .modal { transform: translateY(0); }
+    .modal-header { padding: 36px 40px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .modal-header-text .modal-tag { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .modal-header-text h2 { font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--charcoal); }
+    .modal-close { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 2px; color: var(--slate); flex-shrink: 0; transition: all 0.2s; }
+    .modal-close:hover { background: var(--light); color: var(--charcoal); }
+    .modal-body { padding: 32px 40px; }
+    .modal-body img { width: 100%; height: 240px; object-fit: cover; margin-bottom: 28px; border-radius: 2px; }
+    .modal-body p { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 16px; }
+    .modal-body h3 { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--charcoal); margin: 24px 0 10px; }
+    .modal-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .modal-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--slate); }
+    .modal-list li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 8px; }
+    .modal-footer { padding: 20px 40px 32px; display: flex; gap: 12px; border-top: 1px solid var(--border); }
+
+    /* ── FORM MODALS ──────────────────────────────── */
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 7px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 2px; font-family: var(--font-body); font-size: 15px; color: var(--charcoal); background: var(--white); transition: border-color 0.2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit { width: 100%; padding: 15px; background: var(--red); color: var(--white); font-family: var(--font-head); font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .form-submit:hover { background: var(--brick); }
+    .form-notice { font-size: 12px; color: var(--slate); margin-top: 12px; text-align: center; }
+
+    /* ── MOBILE NAV DRAWER ─────────────────────────── */
+    .nav-drawer { position: fixed; top: 68px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); z-index: 999; padding: 24px; display: none; flex-direction: column; gap: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a { font-family: var(--font-head); font-size: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--charcoal); padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 1024px) {
+      .why-layout { grid-template-columns: 1fr; gap: 48px; }
+      .why-badge { bottom: 16px; right: 16px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .awards-grid { grid-template-columns: 1fr; gap: 2px; }
+      .mission-layout { grid-template-columns: 1fr; }
+      .mission-img { height: 300px; }
+      .mission-content { padding: 56px 40px; }
+    }
+    @media (max-width: 1080px) {
+      .nav-links, .nav-actions .nav-emergency { display: none; }
+      .hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid, .news-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .cta-inner { flex-direction: column; align-items: flex-start; }
+      .cta-actions { flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .social-inner { flex-direction: column; gap: 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
+      .news-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">
+      <img src="olsson-roofing-logo.svg" alt="Olsson Roofing" />
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#mission">Mission Critical</a>
+      <a href="#safety">Safety</a>
+      <a href="#awards">Awards</a>
+      <a href="#news">Stories</a>
+      <a href="#footer">Locations</a>
+    </div>
+    <div class="nav-actions">
+      <a href="tel:6308920449" class="nav-emergency">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.56 6.56l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        (630) 892-0449
+      </a>
+      <button class="btn btn-primary" onclick="openModal('modal-quote')">Get a Quote</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#services" onclick="closeDrawer()">Services</a>
+    <a href="#mission" onclick="closeDrawer()">Mission Critical</a>
+    <a href="#safety" onclick="closeDrawer()">Safety</a>
+    <a href="#awards" onclick="closeDrawer()">Awards</a>
+    <a href="#news" onclick="closeDrawer()">Stories</a>
+    <a href="#footer" onclick="closeDrawer()">Locations</a>
+    <a href="tel:6308920449">Emergency: (630) 892-0449</a>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openModal('modal-quote');closeDrawer()">Request a Quote</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/369982555/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=3f0fb0fa55ba56368228bbfb9cb5b5877eb560f85d4c236692413f5df7428d77" type="video/mp4" />
+      <!-- Fallback for browsers that can't play the video -->
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1920/v1772117897/aerial-view-commerical-roof_ocnvcu.webp" alt="Aerial view of commercial roofing project" style="width:100%;height:100%;object-fit:cover;" />
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Illinois's Largest Commercial Roofer Since 1914
+      </div>
+      <h1 class="hero-title">We Get There Faster.<br>We Fix It <span>Better.</span><br>We Work Safer.</h1>
+      <p class="hero-sub">Olsson Roofing has protected Midwest facilities for over 110 years — from mission-critical data centers to institutional campuses, industrial plants, and everything in between.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-quote')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Request a Quote
+        </button>
+        <button class="btn btn-outline" onclick="openModal('modal-service-repair')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Explore Services
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS
+═══════════════════════════════════════════ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">110+</div>
+      <div class="stat-label">Years in Business</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Major Projects Annually</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4,000+</div>
+      <div class="stat-label">Service Requests / Year</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">#1</div>
+      <div class="stat-label">Largest in Illinois</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="services-intro">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Total Building Envelope Expertise</h2>
+      <p>Four specialized divisions — one point of accountability. We eliminate the finger-pointing between trades by managing roofing and architectural metal as a complete system.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card" onclick="openModal('modal-service-repair')" role="button" tabindex="0" aria-label="Learn more about Service and Repair">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117960/olsson-roofer-applying-roofing_ixs9kg.webp" alt="Olsson roofer applying roofing material" class="service-img" />
+        <div class="service-body">
+          <div class="service-tag">24 / 7 Response</div>
+          <h3 class="service-title">Service &amp; Repair</h3>
+          <p class="service-desc">The largest dedicated service staff for commercial repair in Illinois. We get to you faster, fix it better, and document everything from initial call to closeout.</p>
+          <span class="service-arrow">
+            Deep Dive
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="openModal('modal-commercial')" role="button" tabindex="0" aria-label="Learn more about Commercial Roofing">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117998/roofer-on-top-of-commerical-building_dvxjwt.webp" alt="Roofer working on top of a commercial building" class="service-img" />
+        <div class="service-body">
+          <div class="service-tag">New Construction · Replacement · Recover</div>
+          <h3 class="service-title">Commercial Roofing</h3>
+          <p class="service-desc">From new construction and full replacements to recover/overlay and green roofing systems. Verified Hall-of-Fame status across Carlisle, Firestone/Elevate, and Johns Manville.</p>
+          <span class="service-arrow">
+            Deep Dive
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="openModal('modal-metal')" role="button" tabindex="0" aria-label="Learn more about Metal Edge">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117926/metal-edge-roof-building_scotfc.webp" alt="Metal Edge architectural roofing system on a building" class="service-img" />
+        <div class="service-body">
+          <div class="service-tag">Design · Fabricate · Install</div>
+          <h3 class="service-title">Metal Edge — Architectural Sheet Metal</h3>
+          <p class="service-desc">In-house design, fabrication, and installation of standing seam systems, metal wall panels, and all architectural metal. Concept to completion under one roof.</p>
+          <span class="service-arrow">
+            Deep Dive
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="service-card" onclick="openModal('modal-mission')" role="button" tabindex="0" aria-label="Learn more about Mission Critical">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118101/mission-critical-data-center-roofing_tizkau.jpg" alt="Commercial roofing work on a large data center facility" class="service-img" />
+        <div class="service-body">
+          <div class="service-tag">Data Centers · Hyperscale · Pharma</div>
+          <h3 class="service-title">Mission Critical</h3>
+          <p class="service-desc">Specialized technicians. Live-environment roof replacements. No-odor, non-disruptive protocols. Trusted by Abbott, AbbVie, and the world's largest hyperscale developers.</p>
+          <span class="service-arrow">
+            Deep Dive
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WHY OLSSON
+═══════════════════════════════════════════ -->
+<section id="why">
+  <div class="container">
+    <div class="why-layout">
+      <div class="why-image">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772117907/commerical-roofers-group-posing-for-picture_t7we2i.jpg" alt="Olsson Roofing team" />
+        <div class="why-badge">
+          <div class="why-badge-num">EMR</div>
+          <div class="why-badge-label">Industry-Leading<br>Safety Rating</div>
+        </div>
+      </div>
+      <div class="why-content">
+        <div class="section-label">Why Olsson</div>
+        <h2 class="section-title">The Standard by Which Others Are Measured</h2>
+        <p>More than a century of continuous operation isn't luck — it's the result of a deliberate culture of safety, planning, and accountability that runs from the boardroom to the roof's edge.</p>
+        <div class="pillars-grid">
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="pillar-text">
+              <h4>Safety Is a Product</h4>
+              <p>Gold Medal CRCA Safety Award. Low EMR protects your project and your liability.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="pillar-text">
+              <h4>24/7 Responsiveness</h4>
+              <p>Largest service staff in Illinois. 4,000+ calls answered every year, around the clock.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="pillar-text">
+              <h4>Institutional Scale</h4>
+              <p>51-truck fleet covering 1.6M miles/year. Zero crashes in 24 months. Full logistics in-house.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </div>
+            <div class="pillar-text">
+              <h4>Single Point of Accountability</h4>
+              <p>One team, one contract, full responsibility from design through closeout.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="pillar-text">
+              <h4>Technology-Driven Operations</h4>
+              <p>Explorer Eclipse ERP — real-time job costing, dispatch, and asset management since 2010.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div class="pillar-text">
+              <h4>Deep Long-Term Tenure</h4>
+              <p>Industry-leading employee retention means every project gets senior-level field expertise.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MISSION CRITICAL
+═══════════════════════════════════════════ -->
+<section id="mission">
+  <div class="mission-layout">
+    <div class="mission-img">
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118101/mission-critical-data-center-roofing_tizkau.jpg" alt="Olsson crew completing roofing on a large data center facility" />
+    </div>
+    <div class="mission-content">
+      <div class="section-label">Mission Critical</div>
+      <h2 class="section-title section-title--light">When Downtime Isn't an Option</h2>
+      <div class="mission-cards">
+        <div class="mission-card">
+          <h4>Mission Critical</h4>
+          <p>Specialized, highly trained technicians delivering complex data center construction projects with precision, reliability, and a team-first attitude.</p>
+        </div>
+        <div class="mission-card">
+          <h4>Hyperscale Construction</h4>
+          <p>Deep experience supporting hyperscale development — technical skill and operational discipline for the most demanding large-scale programs.</p>
+        </div>
+        <div class="mission-card">
+          <h4>Data Center Experience</h4>
+          <p>Multiple completed roof replacements on active, fully operational data centers without interruption to service. No-odor, non-disruptive protocols for pharmaceutical-grade environments.</p>
+        </div>
+      </div>
+      <div class="mission-cta">
+        <button class="btn btn-outline" onclick="openModal('modal-mission')">Learn More</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SAFETY
+═══════════════════════════════════════════ -->
+<section id="safety">
+  <div class="container">
+    <div class="safety-layout">
+
+      <div class="safety-images">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118012/safety-fest-guys-in-orange_moczzu.webp" alt="Olsson team at Safetyfest in orange safety gear" class="img-main" />
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_600/v1772118038/two-roofers-olsson-hard-hat_f1a2dq.webp" alt="Two Olsson roofers wearing hard hats on a jobsite" class="img-sm" />
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_600/v1772117950/olsson-hard-hat_pilbkk.webp" alt="Olsson branded hard hat" class="img-sm" />
+        <div class="safety-stat-bubble">
+          <div class="num">Gold</div>
+          <div class="lbl">CRCA Safety Award<br>2007 · 2018 · 2025</div>
+        </div>
+      </div>
+
+      <div class="safety-content">
+        <div class="section-label">Safety Culture</div>
+        <h2 class="section-title">Safety Isn't a Checkbox.<br>It's Our Product.</h2>
+        <p>At Olsson, safety is the foundation every project is built on. Our industry-leading Experience Modification Rate (EMR), zero-crash fleet record, and TRIR consistently below 1.0 aren't just numbers — they're the result of a deliberate, company-wide commitment to every crew member making it home.</p>
+
+        <div class="safety-metrics">
+          <div class="safety-metric">
+            <div class="m-num">&lt; 1.0</div>
+            <div class="m-label">TRIR — Top Performer category, required for Fortune 500 MSAs</div>
+          </div>
+          <div class="safety-metric">
+            <div class="m-num">0</div>
+            <div class="m-label">Fleet crashes in 24 months across 1.6M miles driven</div>
+          </div>
+          <div class="safety-metric">
+            <div class="m-num">3×</div>
+            <div class="m-label">CRCA Gold Medal Safety Award recipient (2007, 2018, 2025)</div>
+          </div>
+          <div class="safety-metric">
+            <div class="m-num">100%</div>
+            <div class="m-label">Annual mandatory safety training for every team member</div>
+          </div>
+        </div>
+
+        <div class="safety-events">
+          <span class="safety-event-tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            OSHA Stand Down Partner
+          </span>
+          <span class="safety-event-tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Safetyfest Participant
+          </span>
+          <span class="safety-event-tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            CRCA Active Member
+          </span>
+        </div>
+
+        <button class="btn btn-primary" onclick="openModal('modal-safety')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Our Full Safety Story
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Safetyfest Strip -->
+<div class="safetyfest-strip">
+  <div class="container">
+    <div class="safetyfest-inner">
+      <div class="safetyfest-img">
+        <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118024/saftey-fest-sign-with-signatures_fqt5ng.webp" alt="Safetyfest pledge sign covered in crew signatures" loading="lazy" />
+      </div>
+      <div class="safetyfest-text">
+        <div class="section-label">Safetyfest &amp; OSHA Stand Down</div>
+        <h3>Showing Up for the Industry,<br>Not Just Our Crew</h3>
+        <p>Olsson Roofing participates in Safetyfest and OSHA's National Stand Down to Prevent Falls — the industry's most important annual safety events. Every year, our team stops work, comes together, and reinforces the culture that sets us apart: every crew member goes home safe, every day.</p>
+        <div class="safetyfest-quotes">
+          <div class="sf-quote">
+            "We take fall prevention and safety training seriously — not just for compliance, but because these are our people. Their safety is non-negotiable."
+            <cite>— Chris Laube, Director of Operations</cite>
+          </div>
+          <div class="sf-quote">
+            "Participating in Safetyfest lets us share what we've learned over 110 years and contribute to raising the bar across the entire roofing industry."
+            <cite>— Mike Reynolds, President</cite>
+          </div>
+        </div>
+        <button class="btn btn-outline" onclick="openModal('modal-safety')">Deep Dive: Safety at Olsson</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     AWARDS & CERTIFICATIONS
+═══════════════════════════════════════════ -->
+<section id="awards">
+  <div class="container">
+    <div class="awards-header">
+      <div class="section-label">Verified Excellence</div>
+      <h2 class="section-title">Triple-Manufacturer Hall of Fame</h2>
+      <p>The only contractor in the region to hold concurrent elite-tier status with the three most prominent manufacturers in commercial roofing. Third-party verification of quality across the full material spectrum.</p>
+    </div>
+    <div class="awards-grid">
+      <div class="award-item">
+        <div class="award-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3 class="award-title">Firestone / Elevate</h3>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;">Elite-tier recognition across EPDM, TPO, and PVC membrane systems from one of the world's leading manufacturers.</p>
+        <div class="award-badges">
+          <span class="badge">Platinum Council</span>
+          <span class="badge">President's Club</span>
+          <span class="badge">Inner Circle of Quality</span>
+          <span class="badge">Hall of Fame</span>
+          <span class="badge">1000 Perfect 10's</span>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <h3 class="award-title">Carlisle SynTec</h3>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;">Invitation-only Hall of Fame status — reserved for a long-term record of perfect or near-perfect installation quality on warrantied square footage.</p>
+        <div class="award-badges">
+          <span class="badge">Hall of Fame</span>
+          <span class="badge">Pinnacle Club</span>
+          <span class="badge">Summit Club</span>
+          <span class="badge">Excellence in Single Ply</span>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="award-title">CRCA Safety &amp; Industry</h3>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;">Chicago Roofing Contractors Association recognition for industry-leading safety culture, scholarship support, and professional development.</p>
+        <div class="award-badges">
+          <span class="badge">Gold Medal Safety Award</span>
+          <span class="badge">CRCA Scholarship Sponsor</span>
+          <span class="badge">JM Summit &amp; Pinnacle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-label">Client Testimonials</div>
+      <h2 class="section-title">Trusted by Facility Directors &amp; GCs Across the Midwest</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="testimonial-text">Olsson Roofing has been exceptional to work with. Their team's professionalism, attention to detail, and commitment to safety made the entire project seamless.</p>
+        <div class="testimonial-author">Philip J. Smith</div>
+        <div class="testimonial-company">Director of Operations</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="testimonial-text">We've worked with Olsson on multiple facilities. Their response time is second to none — when we have an issue, they're on-site the same day. That kind of reliability is rare.</p>
+        <div class="testimonial-author">Wayne Sachs</div>
+        <div class="testimonial-company">Facilities Manager, Hu Friedy</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="testimonial-text">The coordination and communication throughout our project was outstanding. Every milestone was hit on schedule with zero safety incidents — exactly what we need from a roofing partner.</p>
+        <div class="testimonial-author">Mark Ristow</div>
+        <div class="testimonial-company">Senior Project Manager, Bulley &amp; Andrews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     VIDEO STORIES
+═══════════════════════════════════════════ -->
+<section id="video-stories">
+  <div class="container">
+    <div class="vstories-header">
+      <div>
+        <div class="section-label">Video Stories</div>
+        <h2 class="section-title">Olsson in Action</h2>
+      </div>
+    </div>
+    <div class="vstories-scroll-wrap">
+      <button class="vstories-arrow vstories-arrow--prev" id="vsPrev" aria-label="Scroll left">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="vstories-track" id="vstoriesTrack">
+
+        <div class="vstory-thumb" data-index="0" role="button" tabindex="0" aria-label="Play video 1">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1036705588/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=d9e177527118f4722ae3ac76c99b71b72b74332795abc3fc09f73f6a984223b2" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">01</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="1" role="button" tabindex="0" aria-label="Play video 2">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1036699256/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=9efd9337066e68cb59d100ffa82a88c5dc735d2d502340d5b6d4ba282553cd14" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">02</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="2" role="button" tabindex="0" aria-label="Play video 3">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031681856/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=4b91a1cd9476ccc9ee14f20eadf9af7f4cce1ce90c96d657ffec042774d868ca" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">03</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="3" role="button" tabindex="0" aria-label="Play video 4">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031681913/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=f17b521c47947fd4522e82d4facfe6c286067be235670d3484156e5db717e2ec" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">04</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="4" role="button" tabindex="0" aria-label="Play video 5">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031681202/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=37f6ca6971553d14bffbec71ce1fc27ab2a8a32bb2750ea899eee29a2ae84b1a" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">05</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="5" role="button" tabindex="0" aria-label="Play video 6">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031678860/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=06ae56afcaa43ff837d1fc1cd50e161ecbb9fb6face7d7ef847a88512d9ea0dd" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">06</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="6" role="button" tabindex="0" aria-label="Play video 7">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031681664/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=943cffb2c07d4b5b4cee63b81ff8c612a5586563465b0c795a0d0fece9133644" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">07</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="7" role="button" tabindex="0" aria-label="Play video 8">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031679365/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=2816c164962b39ff2be033e6dcb0900247325a774f101cc62864076b9b6fcd29" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">08</span>
+        </div>
+
+        <div class="vstory-thumb" data-index="8" role="button" tabindex="0" aria-label="Play video 9">
+          <video muted loop preload="metadata" tabindex="-1">
+            <source src="https://player.vimeo.com/progressive_redirect/playback/1031679327/rendition/1080p/file.mp4%20%281080p%29.mp4?loc=external&log_user=0&signature=70ea448ae35c266e94c832410fc81a211aa1e9d7837910db6fcfd35c6c2f45a5" type="video/mp4" />
+          </video>
+          <div class="vstory-overlay"></div>
+          <div class="vstory-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="vstory-num">09</span>
+        </div>
+
+      </div>
+      <button class="vstories-arrow vstories-arrow--next" id="vsNext" aria-label="Scroll right">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Video Lightbox -->
+<div id="vstory-lightbox" role="dialog" aria-modal="true" aria-label="Video player">
+  <button class="vstory-lb-prev" id="vsLbPrev" aria-label="Previous video">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="vstory-lb-inner">
+    <button class="vstory-lb-close" id="vsLbClose" aria-label="Close video">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <video id="vstory-lb-video" controls playsinline></video>
+  </div>
+  <button class="vstory-lb-next" id="vsLbNext" aria-label="Next video">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NEWS
+═══════════════════════════════════════════ -->
+<section id="news">
+  <div class="container">
+    <div class="news-header">
+      <div>
+        <div class="section-label">What's New</div>
+        <h2 class="section-title">Stories from Olsson Roofing</h2>
+      </div>
+      <a href="https://www.olssonroofing.com/stories" target="_blank" rel="noopener" class="btn btn-outline-dark">All Stories</a>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-img-wrap">
+          <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118012/safety-fest-guys-in-orange_moczzu.webp" alt="Olsson team at Safetyfest" loading="lazy" />
+        </div>
+        <div class="news-body">
+          <div class="news-date">Jun 23, 2023</div>
+          <h3 class="news-title">Olsson &amp; OSHA Stand Down Week 2023: Preventing Falls</h3>
+          <p class="news-excerpt">Olsson partnered with OSHA for the annual Stand Down Week, reinforcing the safety-first culture that has defined our crew for over a century.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img-wrap">
+          <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118024/saftey-fest-sign-with-signatures_fqt5ng.webp" alt="Safetyfest sign with crew signatures" loading="lazy" />
+        </div>
+        <div class="news-body">
+          <div class="news-date">Jun 14, 2023</div>
+          <h3 class="news-title">Olsson Sponsors Scholarship Winners at CRCA Foundation Event</h3>
+          <p class="news-excerpt">Olsson Roofing proudly supported the CRCA Foundation in honoring the next generation of roofing professionals at the annual scholarship ceremony.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img-wrap">
+          <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117917/down-up-view-of-roofing-foreman-on-chicago-roof_bmmryw.webp" alt="Olsson foreman on a Chicago rooftop" loading="lazy" />
+        </div>
+        <div class="news-body">
+          <div class="news-date">Jul 2, 2021</div>
+          <h3 class="news-title">A Helicopter and Shutting Down Michigan Avenue</h3>
+          <p class="news-excerpt">One of our most memorable projects required closing Michigan Avenue and using helicopter lifts for material delivery in the heart of Chicago.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SOCIAL STRIP
+═══════════════════════════════════════════ -->
+<section id="social">
+  <div class="container">
+    <div class="social-inner">
+      <span class="social-label">Connect with Olsson</span>
+      <div class="social-links">
+        <a href="https://www.facebook.com/OlssonRoofing/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://twitter.com/OlssonRoofing" target="_blank" rel="noopener" class="social-link" aria-label="Twitter/X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/olssonroofing/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/olsson-roofing-company-inc./" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BANNER
+═══════════════════════════════════════════ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text">
+        <h2>Ready to Protect Your Facility?</h2>
+        <p>Our team responds around the clock. Get a quote, schedule an inspection, or call us directly.</p>
+      </div>
+      <div class="cta-actions">
+        <button class="btn btn-white" onclick="openModal('modal-quote')">Request a Quote</button>
+        <a href="tel:6308920449" class="btn btn-outline">Call (630) 892-0449</a>
+        <button class="btn btn-outline" onclick="openModal('modal-careers')">Join Our Team</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="olsson-roofing-logo.svg" alt="Olsson Roofing" />
+        <p>One of the oldest and largest commercial roofing companies in Illinois. Integrity, continuous improvement, customer service, and professionalism — since 1914.</p>
+        <span class="footer-tagline">Nobody cares about roofing like we do.</span>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#" onclick="openModal('modal-service-repair');return false;">Service &amp; Repair</a></li>
+          <li><a href="#" onclick="openModal('modal-commercial');return false;">Commercial Roofing</a></li>
+          <li><a href="#" onclick="openModal('modal-metal');return false;">Metal Edge</a></li>
+          <li><a href="#" onclick="openModal('modal-mission');return false;">Mission Critical</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="https://www.olssonroofing.com/about" target="_blank" rel="noopener">About Us</a></li>
+          <li><a href="https://www.olssonroofing.com/stories" target="_blank" rel="noopener">Stories</a></li>
+          <li><a href="https://www.olssonroofing.com/gallery" target="_blank" rel="noopener">Project Gallery</a></li>
+          <li><a href="#awards">Awards &amp; Certs</a></li>
+          <li><a href="#" onclick="openModal('modal-careers');return false;">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Locations</h4>
+        <p>
+          <strong style="color:rgba(255,255,255,0.8);">Aurora (HQ)</strong><br />
+          740 South Lake St., PO Box 1450<br />
+          Aurora, IL 60507-1450<br />
+          <a href="tel:6308920449">(630) 892-0449</a>
+        </p>
+        <p style="margin-top:16px;">
+          <strong style="color:rgba(255,255,255,0.8);">Romeoville</strong><br />
+          624 Anderson Drive, Unit A<br />
+          Romeoville, IL 60446<br />
+          <a href="tel:7087564696">(708) 756-4696</a>
+        </p>
+        <p style="margin-top:16px;">
+          <strong style="color:var(--red);">Emergency:</strong> <a href="tel:6308920449">(630) 892-0449</a><br />
+          License #: 104-000173
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Olsson Roofing Company, Inc. All rights reserved.</p>
+      <span class="footer-license">Roofing License #104-000173 &nbsp;|&nbsp; Aurora &amp; Romeoville, Illinois</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     MODAL: SERVICE & REPAIR
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-service-repair" role="dialog" aria-modal="true" aria-labelledby="modal-sr-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">24 / 7 Emergency Response</div>
+        <h2 id="modal-sr-title">Service &amp; Repair</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-service-repair')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117971/olsson-roofer-on-roof-cutting-with-saw_awiaxe.webp" alt="Olsson roofer cutting material on commercial roof" />
+      <p>Olsson Roofing maintains the <strong>largest dedicated service staff for commercial repair in Illinois</strong>. Our expert service team is available to customers 24 hours a day and responds to more than 4,000 requests every year — faster dispatch, better outcomes, and safer execution than any competitor in our market.</p>
+      <h3>What We Handle</h3>
+      <ul class="modal-list">
+        <li>Emergency leak response and temporary weatherproofing</li>
+        <li>Scheduled preventive maintenance programs</li>
+        <li>Infrared moisture scanning and drone roof inspections</li>
+        <li>Roof asset management with multi-year capital planning</li>
+        <li>Full documentation from initial dispatch to closeout</li>
+        <li>Membrane repairs: EPDM, TPO, PVC, modified bitumen, BUR</li>
+        <li>Metal flashing repair and re-termination</li>
+        <li>Drain clearing, scupper repair, and ponding water analysis</li>
+      </ul>
+      <h3>Why Our Service Team Wins</h3>
+      <p>Because we operate our own fleet of 51+ power units, we don't rely on third-party logistics. Materials arrive on your schedule, not a carrier's. Our ERP system tracks the history of every roof we've serviced — giving technicians the full picture before they even arrive on site.</p>
+      <p>Our response goal: on your roof, not on hold.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeModal('modal-service-repair');openModal('modal-quote')">Request Service</button>
+      <a href="tel:6308920449" class="btn btn-outline-dark">Call Now: (630) 892-0449</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: COMMERCIAL ROOFING
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-commercial" role="dialog" aria-modal="true" aria-labelledby="modal-cr-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">New Construction · Replacement · Recover</div>
+        <h2 id="modal-cr-title">Commercial Roofing</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-commercial')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117984/olsson-wheel-barrow-on-roof_jocqdi.webp" alt="Olsson crew working with equipment on a commercial roof" />
+      <p>Olsson Roofing manages <strong>200+ major projects annually</strong> across the Midwest — from new industrial construction to full replacements, recover/overlays, and green roofing systems. Our Hall-of-Fame status with all three major manufacturers means every installation is backed by the industry's strongest warranties.</p>
+      <h3>Project Types</h3>
+      <ul class="modal-list">
+        <li>New construction roofing for industrial, institutional, and commercial facilities</li>
+        <li>Full roof replacement and tear-off</li>
+        <li>Roof recover / overlay systems</li>
+        <li>Green roofing and vegetative systems</li>
+        <li>EPDM, TPO, PVC single-ply membrane systems</li>
+        <li>Modified bitumen and built-up roofing (BUR)</li>
+        <li>Insulation and air barrier systems</li>
+      </ul>
+      <h3>The Triple-Manufacturer Advantage</h3>
+      <p>Olsson is the <strong>only regional contractor</strong> to hold concurrent Hall-of-Fame and elite-tier status with Carlisle SynTec, Firestone/Elevate, and Johns Manville. This means we can specify and install the right system for your building — not just the one a single-manufacturer contractor is trained on.</p>
+      <p>This also translates to the <strong>strongest available manufacturer warranties</strong>, directly benefiting building owners at the time of sale or refinancing.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeModal('modal-commercial');openModal('modal-quote')">Request a Quote</button>
+      <a href="tel:6308920449" class="btn btn-outline-dark">Call (630) 892-0449</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: METAL EDGE
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-metal" role="dialog" aria-modal="true" aria-labelledby="modal-me-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">A Division of Olsson Roofing</div>
+        <h2 id="modal-me-title">Metal Edge — Architectural Sheet Metal</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-metal')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_800/v1772117941/metal-prods-standing-seam-roof_ohrca0.webp" alt="Standing seam metal roof system installed by Metal Edge" />
+      <p>Metal Edge is Olsson Roofing's specialized architectural sheet metal division — concept-to-installation, with <strong>significant in-house fabrication capability</strong>. Led by professionals with 30+ years of experience, Metal Edge handles the full scope of building envelope metal work.</p>
+      <h3>Capabilities</h3>
+      <ul class="modal-list">
+        <li>Standing seam metal roof systems</li>
+        <li>Metal wall panel systems</li>
+        <li>Architectural fascia, coping, and edge metal</li>
+        <li>Custom fabricated components (in-house shop production)</li>
+        <li>Gutters, downspouts, and drainage metal</li>
+        <li>CAD design and concept development</li>
+        <li>All roof-related architectural sheet metal</li>
+      </ul>
+      <h3>Total Envelope Responsibility</h3>
+      <p>The most common points of water infiltration are the <strong>transitions between the flat roof membrane and the metal flashing or facade</strong>. By managing both roofing and metal, Olsson eliminates the finger-pointing that occurs between separate contractors — one team, one warranty, one call if anything ever needs attention.</p>
+      <p>Notable Metal Edge projects include complex architectural installations at the Joslyn Art Museum expansion and large-scale commercial developments across Chicagoland.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeModal('modal-metal');openModal('modal-quote')">Request a Quote</button>
+      <a href="tel:6308920449" class="btn btn-outline-dark">Call (630) 892-0449</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: MISSION CRITICAL
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-mission" role="dialog" aria-modal="true" aria-labelledby="modal-mc-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">Data Centers · Hyperscale · Pharmaceutical</div>
+        <h2 id="modal-mc-title">Mission Critical</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-mission')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118101/mission-critical-data-center-roofing_tizkau.jpg" alt="Commercial roofing on a large data center facility" />
+      <p>Olsson Roofing deploys <strong>specialized, highly trained mission-critical technicians</strong> to deliver complex data center and high-sensitivity construction projects with precision, reliability, and a team-first attitude. We have completed more new-construction data center roofing projects than nearly any contractor in our market.</p>
+      <h3>Hyperscale Construction</h3>
+      <p>Our experts have deep experience supporting hyperscale development — providing the technical skill and operational discipline required to meet the demanding standards of large-scale data center programs. From schedule precision to phased-delivery coordination, we've built the playbook.</p>
+      <h3>Live Environment Capabilities</h3>
+      <ul class="modal-list">
+        <li>Completed multiple roof replacements on <strong>fully operational data centers</strong> without service interruption</li>
+        <li>No-odor, cold-applied and mechanically attached systems for pharmaceutical environments (Abbott, AbbVie)</li>
+        <li>Dust and debris mitigation protocols for cleanroom-adjacent work</li>
+        <li>TRIR and DART rates consistently in the "Top Performer" category (below 1.0)</li>
+        <li>Contractor pre-qualification compliance for Fortune 500 master service agreements</li>
+      </ul>
+      <h3>Pharmaceutical-Grade Reliability</h3>
+      <p>For facilities like Abbott Laboratories and AbbVie, a roof breach can contaminate multi-million dollar batches of life-saving medicine. Olsson's non-disruptive protocols, low EMR, and Gold Medal Safety Award ensure we meet the most stringent on-site safety requirements in the world.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeModal('modal-mission');openModal('modal-quote')">Request a Consultation</button>
+      <a href="tel:6308920449" class="btn btn-outline-dark">Call (630) 892-0449</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: REQUEST A QUOTE (Netlify Form)
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-quote" role="dialog" aria-modal="true" aria-labelledby="modal-q-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">Get Started</div>
+        <h2 id="modal-q-title">Request a Quote</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-quote')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="padding-top:24px;">
+      <form name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="quoteForm">
+        <input type="hidden" name="form-name" value="quote-request" />
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="q-first">First Name <span style="color:var(--red)">*</span></label>
+            <input type="text" id="q-first" name="first-name" required placeholder="First name" />
+          </div>
+          <div class="form-group">
+            <label for="q-last">Last Name <span style="color:var(--red)">*</span></label>
+            <input type="text" id="q-last" name="last-name" required placeholder="Last name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="q-company">Company / Organization</label>
+          <input type="text" id="q-company" name="company" placeholder="Company name" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="q-email">Email <span style="color:var(--red)">*</span></label>
+            <input type="email" id="q-email" name="email" required placeholder="you@company.com" />
+          </div>
+          <div class="form-group">
+            <label for="q-phone">Phone</label>
+            <input type="tel" id="q-phone" name="phone" placeholder="(630) 555-0100" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="q-service">Service Needed <span style="color:var(--red)">*</span></label>
+          <select id="q-service" name="service" required>
+            <option value="" disabled selected>Select a service...</option>
+            <option value="emergency-repair">Emergency Repair</option>
+            <option value="service-maintenance">Service &amp; Maintenance</option>
+            <option value="commercial-roofing">Commercial Roofing (New / Replacement)</option>
+            <option value="metal-edge">Metal Edge / Architectural Sheet Metal</option>
+            <option value="mission-critical">Mission Critical / Data Center</option>
+            <option value="inspection">Roof Inspection</option>
+            <option value="other">Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="q-location">Facility Location</label>
+          <input type="text" id="q-location" name="location" placeholder="City, State" />
+        </div>
+        <div class="form-group">
+          <label for="q-message">Project Details</label>
+          <textarea id="q-message" name="message" placeholder="Describe your project, building type, timeline, or any known issues..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Request</button>
+        <p class="form-notice">We'll respond within one business day. For emergencies, call <a href="tel:6308920449" style="color:var(--red);">(630) 892-0449</a> directly.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL: CAREERS (Netlify Form)
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-careers" role="dialog" aria-modal="true" aria-labelledby="modal-c-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">We're Hiring</div>
+        <h2 id="modal-c-title">Join the Olsson Team</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-careers')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="padding-top:24px;">
+      <p style="margin-bottom:20px;">Olsson Roofing is known for industry-leading employee retention. We build careers — not just jobs. If you're looking for a team that invests in its people and takes safety seriously, we'd like to hear from you.</p>
+      <form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="career-application" />
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="c-first">First Name <span style="color:var(--red)">*</span></label>
+            <input type="text" id="c-first" name="first-name" required placeholder="First name" />
+          </div>
+          <div class="form-group">
+            <label for="c-last">Last Name <span style="color:var(--red)">*</span></label>
+            <input type="text" id="c-last" name="last-name" required placeholder="Last name" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="c-email">Email <span style="color:var(--red)">*</span></label>
+            <input type="email" id="c-email" name="email" required placeholder="you@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="c-phone">Phone <span style="color:var(--red)">*</span></label>
+            <input type="tel" id="c-phone" name="phone" required placeholder="(630) 555-0100" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="c-role">Position of Interest <span style="color:var(--red)">*</span></label>
+          <select id="c-role" name="position" required>
+            <option value="" disabled selected>Select a role...</option>
+            <option value="journeyman-roofer">Journeyman Roofer</option>
+            <option value="apprentice-roofer">Apprentice Roofer</option>
+            <option value="service-tech">Service Technician</option>
+            <option value="project-manager">Project Manager</option>
+            <option value="estimator">Estimator</option>
+            <option value="sheet-metal">Sheet Metal / Metal Edge</option>
+            <option value="foreman">Foreman / Superintendent</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="c-experience">Years of Roofing Experience</label>
+          <select id="c-experience" name="experience">
+            <option value="" disabled selected>Select...</option>
+            <option value="0-1">0–1 years (apprentice / new to trade)</option>
+            <option value="2-5">2–5 years</option>
+            <option value="6-10">6–10 years</option>
+            <option value="10+">10+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="c-message">Tell Us About Yourself</label>
+          <textarea id="c-message" name="message" placeholder="Briefly describe your background, certifications, or why you want to join Olsson..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Application</button>
+        <p class="form-notice">Olsson Roofing is an equal opportunity employer. We offer competitive wages, benefits, and a strong safety culture.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     MODAL: SAFETY DEEP DIVE
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-safety" role="dialog" aria-modal="true" aria-labelledby="modal-safety-title">
+  <div class="modal" style="max-width:780px;">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-tag">Safety Culture · EMR · Safetyfest · OSHA</div>
+        <h2 id="modal-safety-title">Safety at Olsson Roofing</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-safety')" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img src="https://res.cloudinary.com/dsbllwpbh/image/upload/f_auto,q_auto,w_1200/v1772118012/safety-fest-guys-in-orange_moczzu.webp" alt="Olsson Roofing team at Safetyfest" />
+
+      <p>At Olsson Roofing, safety isn't a program — it's a deeply embedded organizational value that predates modern OSHA requirements by decades. Our safety record is one of the most powerful competitive advantages we hold, and it directly benefits every client, every project, and every crew member.</p>
+
+      <h3>Experience Modification Rate (EMR)</h3>
+      <p>The EMR is the construction industry's primary actuarial safety measure. A rating of 1.0 is the industry average. A rating <em>below</em> 1.0 means a contractor has fewer and less severe workers' compensation claims than the norm — and pays significantly lower insurance premiums as a result.</p>
+      <p>Olsson Roofing consistently maintains an EMR well below 1.0. For our clients, this translates directly to:</p>
+      <ul class="modal-list">
+        <li>Lower overall project risk and insurance-related costs</li>
+        <li>Pre-qualification eligibility for Fortune 500 and institutional contracts that require contractors with a sub-1.0 EMR</li>
+        <li>Confidence that the team on your roof is trained, disciplined, and supervised to the highest standard</li>
+        <li>Fewer schedule disruptions caused by on-site incidents</li>
+      </ul>
+
+      <h3>Total Recordable Incident Rate (TRIR) &amp; DART</h3>
+      <p>Olsson's TRIR — the number of recordable incidents per 100 full-time workers — consistently places us in the <strong>"Top Performer" category (below 1.0)</strong>. Our DART rate (Days Away, Restricted, or Transferred) reflects the same discipline. Clients such as Abbott Laboratories and AbbVie monitor both metrics as a non-negotiable prerequisite for any roofing contractor working on their campuses.</p>
+
+      <h3>Fleet Safety: Zero Crashes on 1.6 Million Miles</h3>
+      <p>Olsson operates a private fleet of 51+ power units that covers more than 1.6 million miles annually across the Midwest. According to FMCSA (Federal Motor Carrier Safety Administration) data, Olsson Roofing has recorded <strong>zero crashes — fatal, injury, or tow-away — in the 24 months preceding 2026</strong>. For a fleet of that scale and mileage, this is a statistically remarkable achievement and a direct reflection of our driver training programs and vehicle maintenance standards.</p>
+
+      <h3>CRCA Gold Medal Safety Award</h3>
+      <p>The Chicago Roofing Contractors Association (CRCA) Gold Medal Safety Award is the highest safety honor in the Illinois commercial roofing industry. Olsson Roofing has received this award three times — in 2007, 2018, and 2025 — a distinction held by no other contractor in our market. The award recognizes sustained excellence in jobsite safety, training program quality, and EMR performance over multiple consecutive years.</p>
+
+      <h3>OSHA National Stand Down to Prevent Falls</h3>
+      <p>Each year, Olsson Roofing participates in OSHA's National Stand Down to Prevent Falls in Construction — the industry's most important annual safety event. During Stand Down Week, all field operations pause for dedicated safety training sessions focused on fall prevention, PPE use, and hazard recognition. Olsson has partnered with OSHA's Naperville Area Office and industry safety experts to deliver training that goes well beyond the regulatory minimum.</p>
+      <ul class="modal-list">
+        <li>Fall arrest system inspection and proper harness fitting</li>
+        <li>Leading-edge work protocols</li>
+        <li>Ladder safety and roof access procedures</li>
+        <li>Toolbox talk facilitation for foremen and crew leads</li>
+      </ul>
+
+      <h3>Safetyfest</h3>
+      <p>Safetyfest is a multi-day regional safety education event bringing together contractors, safety professionals, and OSHA representatives. Olsson Roofing has been a consistent participant and presenter, with company leaders including President Mike Reynolds taking the stage to share Olsson's safety philosophy with the broader industry. Our crew members attend sessions on new regulations, emerging best practices, and hands-on skill refreshers.</p>
+      <p>The Safetyfest pledge board — signed by every attending crew member — represents Olsson's collective personal commitment: every person goes home safe, every single day.</p>
+
+      <h3>The 5 P's Philosophy</h3>
+      <p><strong>Proper Planning Prevents Poor Performance.</strong> This motto, championed by Olsson's field leaders, captures the core of our safety approach: safety incidents are almost always the result of inadequate planning, not bad luck. By building safety review into every pre-job meeting, daily toolbox talk, and project closeout, Olsson ensures that hazards are identified and mitigated before work begins — not after an incident occurs.</p>
+
+      <h3>Pharmaceutical &amp; Mission-Critical Environments</h3>
+      <p>Working in active pharmaceutical facilities (Abbott, AbbVie) and live data centers demands a safety standard that goes beyond OSHA baseline requirements. Olsson's protocols for these environments include:</p>
+      <ul class="modal-list">
+        <li>No-odor, cold-applied installation methods to protect indoor air quality</li>
+        <li>Dust and debris containment systems to prevent cleanroom contamination</li>
+        <li>Strict badge-in / badge-out access control integration with client security</li>
+        <li>TRIR and DART documentation provided to facility managers on request</li>
+        <li>Pre-task planning (PTP) forms completed and submitted before any scope change</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeModal('modal-safety');openModal('modal-quote')">Request a Quote</button>
+      <a href="tel:6308920449" class="btn btn-outline-dark">Call (630) 892-0449</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+  // ── Nav scroll shadow
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // ── Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    navDrawer.classList.toggle('open');
+  });
+  function closeDrawer() {
+    navDrawer.classList.remove('open');
+  }
+
+  // ── Modal system
+  function openModal(id) {
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Focus first focusable element
+    const focusable = overlay.querySelector('button, input, select, textarea, a');
+    if (focusable) setTimeout(() => focusable.focus(), 50);
+  }
+
+  function closeModal(id) {
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeModal(overlay.id);
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(overlay => {
+        closeModal(overlay.id);
+      });
+    }
+  });
+
+  // ── Service card keyboard accessibility
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  // ── Form success handling (Netlify redirect-free)
+  document.querySelectorAll('form[data-netlify]').forEach(form => {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch('/', { method: 'POST', body: data });
+        if (res.ok) {
+          form.innerHTML = `
+            <div style="text-align:center;padding:40px 0;">
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#E9322E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 16px;display:block;"><polyline points="20 6 9 17 4 12"/></svg>
+              <h3 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:#161616;margin-bottom:8px;">Thank You!</h3>
+              <p style="color:#333;font-size:15px;">We've received your submission and will be in touch soon.<br>For urgent matters, call <a href="tel:6308920449" style="color:#E9322E;">(630) 892-0449</a>.</p>
+            </div>`;
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        alert('There was an issue submitting the form. Please call us at (630) 892-0449.');
+      }
+    });
+  });
+
+  // ── Video Stories ────────────────────────────────────────────────
+  const track = document.getElementById('vstoriesTrack');
+  const thumbs = Array.from(document.querySelectorAll('.vstory-thumb'));
+  const lightbox = document.getElementById('vstory-lightbox');
+  const lbVideo = document.getElementById('vstory-lb-video');
+  let currentVideoIdx = 0;
+
+  // Collect all video src URLs up front
+  const videoSrcs = thumbs.map(t => t.querySelector('source').src);
+
+  // Hover preview: play muted thumb on hover
+  thumbs.forEach(thumb => {
+    const vid = thumb.querySelector('video');
+    thumb.addEventListener('mouseenter', () => { vid.play().catch(() => {}); });
+    thumb.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+  });
+
+  // Open lightbox
+  function openLightbox(idx) {
+    currentVideoIdx = idx;
+    lbVideo.src = videoSrcs[idx];
+    lbVideo.load();
+    lbVideo.play().catch(() => {});
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close lightbox
+  function closeLightbox() {
+    lbVideo.pause();
+    lbVideo.src = '';
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Navigate lightbox
+  function lbNavigate(dir) {
+    currentVideoIdx = (currentVideoIdx + dir + videoSrcs.length) % videoSrcs.length;
+    lbVideo.src = videoSrcs[currentVideoIdx];
+    lbVideo.load();
+    lbVideo.play().catch(() => {});
+  }
+
+  // Thumb click / keyboard
+  thumbs.forEach((thumb, i) => {
+    thumb.addEventListener('click', () => openLightbox(i));
+    thumb.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+    });
+  });
+
+  document.getElementById('vsLbClose').addEventListener('click', closeLightbox);
+  document.getElementById('vsLbPrev').addEventListener('click', () => lbNavigate(-1));
+  document.getElementById('vsLbNext').addEventListener('click', () => lbNavigate(1));
+
+  // Close on backdrop click
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  // Keyboard nav in lightbox
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') lbNavigate(-1);
+    if (e.key === 'ArrowRight') lbNavigate(1);
+  });
+
+  // Scroll track arrows
+  document.getElementById('vsPrev').addEventListener('click', () => {
+    track.scrollBy({ left: -(196 * 3), behavior: 'smooth' });
+  });
+  document.getElementById('vsNext').addEventListener('click', () => {
+    track.scrollBy({ left: 196 * 3, behavior: 'smooth' });
+  });
+
+  // ── Intersection Observer: fade-in on scroll
+  const faders = document.querySelectorAll('.service-card, .pillar, .award-item, .testimonial-card, .news-card, .stat-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  faders.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.5s ease ${i * 0.05}s, transform 0.5s ease ${i * 0.05}s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
