@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Analysis — Olsson Roofing 2026</title>
+<link rel="icon" href="favicon-black.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E9322E;
+    --brick: #802B26;
+    --charcoal: #161616;
+    --slate: #333333;
+    --mid: #555;
+    --light: #f5f5f5;
+    --white: #fff;
+    --border: #e0e0e0;
+    --green: #2A7D4F;
+    --amber: #C47A00;
+    --blue: #1A5FAB;
+    --radius: 10px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.18);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--slate);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--charcoal);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--red);
+  }
+  .site-header .logo-group { display: flex; align-items: center; gap: 0; }
+  .header-logo { display: flex; flex-direction: column; gap: 4px; }
+  .header-logo svg { height: 34px; width: auto; display: block; }
+  .header-logo-sub { font-size: 10px; font-weight: 500; color: #aaa; letter-spacing: 0.1em; text-transform: uppercase; }
+  .header-badge { background: var(--red); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 0.04em; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--slate) 100%);
+    color: #fff;
+    padding: 64px 32px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(233,50,46,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 em { color: var(--red); font-style: normal; }
+  .hero-sub {
+    font-size: 17px;
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .verdict-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 40px;
+    padding: 10px 24px;
+    font-size: 14px;
+    color: #ddd;
+    font-weight: 500;
+  }
+  .verdict-strip .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+  .verdict-strip strong { color: #fff; }
+
+  /* ── Section layout ── */
+  .section { padding: 56px 24px; max-width: 1160px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+  .section-sub { font-size: 14px; color: var(--mid); margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 2px solid var(--border); margin: 0 0 32px; }
+
+  /* ── Score cards ── */
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; margin-bottom: 48px; }
+  .score-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+    border-top: 4px solid transparent;
+  }
+  .score-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .score-card.red { border-top-color: var(--red); }
+  .score-card.green { border-top-color: var(--green); }
+  .score-card.amber { border-top-color: var(--amber); }
+  .score-card.blue { border-top-color: var(--blue); }
+  .score-card .score-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .score-card.red .score-num { color: var(--red); }
+  .score-card.green .score-num { color: var(--green); }
+  .score-card.amber .score-num { color: var(--amber); }
+  .score-card.blue .score-num { color: var(--blue); }
+  .score-card .score-label { font-size: 13px; font-weight: 600; color: var(--slate); }
+  .score-card .score-hint { font-size: 11px; color: #999; margin-top: 4px; }
+
+  /* ── Diagnosis banner ── */
+  .diagnosis-banner {
+    background: linear-gradient(135deg, var(--charcoal), var(--slate));
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .diagnosis-banner::before {
+    content: '"';
+    position: absolute; top: -20px; left: 16px;
+    font-size: 160px; font-family: Georgia, serif;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .diagnosis-banner p {
+    font-size: 18px;
+    line-height: 1.65;
+    font-style: italic;
+    color: #e0e0e0;
+    max-width: 820px;
+  }
+  .diagnosis-banner p em { color: var(--red); font-style: normal; font-weight: 600; }
+  .diagnosis-banner cite { display: block; margin-top: 14px; font-size: 12px; color: #888; font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ── Competitor table ── */
+  .comp-table-wrap { overflow-x: auto; margin-bottom: 48px; }
+  table.comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    min-width: 700px;
+  }
+  .comp-table thead { background: var(--charcoal); color: #fff; }
+  .comp-table thead th {
+    padding: 14px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+  }
+  .comp-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; }
+  .comp-table tbody tr:hover { background: #fafafa; }
+  .comp-table tbody tr.olsson-row { background: rgba(233,50,46,0.05); }
+  .comp-table tbody td { padding: 13px 16px; font-size: 13.5px; vertical-align: middle; }
+  .comp-table .firm-name { font-weight: 700; color: var(--charcoal); }
+  .comp-table .firm-name.highlight { color: var(--red); }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .pill-green { background: rgba(42,125,79,0.12); color: var(--green); }
+  .pill-amber { background: rgba(196,122,0,0.12); color: var(--amber); }
+  .pill-red { background: rgba(233,50,46,0.12); color: var(--red); }
+  .pill-blue { background: rgba(26,95,171,0.12); color: var(--blue); }
+  .pill-gray { background: #eee; color: #666; }
+  .more-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; color: var(--blue);
+    background: none; border: none; cursor: pointer;
+    padding: 2px 0;
+    transition: color 0.15s;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .more-btn:hover { color: var(--brick); }
+
+  /* ── Two-col layout ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Strength/Gap cards ── */
+  .sg-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .sg-card .sg-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 18px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .sg-card.strengths .sg-header { background: rgba(42,125,79,0.10); color: var(--green); }
+  .sg-card.gaps .sg-header { background: rgba(233,50,46,0.10); color: var(--red); }
+  .sg-card .sg-icon { font-size: 18px; }
+  .sg-list { list-style: none; padding: 0; }
+  .sg-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .sg-list li:last-child { border-bottom: none; }
+  .sg-list li .bullet {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .strengths .bullet { background: var(--green); color: #fff; }
+  .gaps .bullet { background: var(--red); color: #fff; }
+  .sg-list li .item-text { flex: 1; }
+  .sg-list li .item-text strong { display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
+
+  /* ── Priority tiers ── */
+  .tier-block { margin-bottom: 32px; }
+  .tier-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 16px;
+  }
+  .tier-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .tier-1 .tier-badge { background: var(--red); color: #fff; }
+  .tier-2 .tier-badge { background: var(--amber); color: #fff; }
+  .tier-3 .tier-badge { background: var(--blue); color: #fff; }
+  .tier-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px; color: var(--charcoal); }
+  .action-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .action-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .action-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .tier-1 .action-card { border-left-color: var(--red); }
+  .tier-2 .action-card { border-left-color: var(--amber); }
+  .tier-3 .action-card { border-left-color: var(--blue); }
+  .action-card .action-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .action-card .action-title { font-weight: 700; font-size: 14px; color: var(--charcoal); margin-bottom: 6px; }
+  .action-card .action-body { font-size: 13px; color: var(--mid); line-height: 1.5; }
+  .action-card .action-tap {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 12px;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--blue);
+    border: 1.5px solid var(--blue);
+    background: transparent;
+    transition: background 0.15s, color 0.15s;
+  }
+  .action-card:hover .action-tap { background: var(--blue); color: #fff; }
+
+  /* Mini tap button for gap cards */
+  .tap-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 10px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    border: 1.5px solid currentColor;
+    background: transparent;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tap-btn-red   { color: var(--red); }
+  .tap-btn-amber { color: var(--amber); }
+  .tap-btn-blue  { color: var(--blue); }
+  .tap-btn-green { color: var(--green); }
+  .gap-row-card:hover .tap-btn-red   { background: var(--red);   color: #fff; }
+  .gap-row-card:hover .tap-btn-amber { background: var(--amber); color: #fff; }
+  .gap-row-card:hover .tap-btn-blue  { background: var(--blue);  color: #fff; }
+  .score-card:hover .tap-btn-red     { background: var(--red);   color: #fff; }
+  .score-card:hover .tap-btn-amber   { background: var(--amber); color: #fff; }
+  .score-card:hover .tap-btn-green   { background: var(--green); color: #fff; }
+
+  /* ── SEO / visibility section ── */
+  .gap-row-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .gap-row-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .gap-row-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .gap-row-card.crit { border-top-color: var(--red); }
+  .gap-row-card.warn { border-top-color: var(--amber); }
+  .gap-row-card.info { border-top-color: var(--blue); }
+  .gap-row-card .gap-icon { font-size: 22px; margin-bottom: 10px; }
+  .gap-row-card .gap-title { font-weight: 700; font-size: 13.5px; color: var(--charcoal); margin-bottom: 6px; }
+  .gap-row-card .gap-body { font-size: 12.5px; color: var(--mid); line-height: 1.55; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--white);
+    border-radius: 14px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalIn 0.22s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: none; } }
+  .modal-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    position: sticky; top: 0; background: var(--white); z-index: 2;
+  }
+  .modal-header-inner { flex: 1; }
+  .modal-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .modal-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; color: var(--charcoal); line-height: 1.2; }
+  .modal-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 22px; color: #999; flex-shrink: 0;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    transition: background 0.15s;
+  }
+  .modal-close:hover { background: var(--light); color: var(--charcoal); }
+  .modal-body { padding: 24px 28px 32px; }
+  .modal-body h3 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: var(--charcoal); margin: 22px 0 10px; }
+  .modal-body h3:first-child { margin-top: 0; }
+  .modal-body p { font-size: 14px; line-height: 1.7; color: var(--slate); margin-bottom: 12px; }
+  .modal-body ul { padding-left: 20px; margin-bottom: 14px; }
+  .modal-body ul li { font-size: 13.5px; line-height: 1.65; color: var(--slate); margin-bottom: 6px; }
+  .modal-body .highlight-box {
+    background: rgba(233,50,46,0.06);
+    border-left: 3px solid var(--red);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .modal-body .highlight-box strong { color: var(--charcoal); }
+  .modal-body .comp-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  .modal-body .comp-compare .cc { background: var(--light); border-radius: 8px; padding: 14px; }
+  .modal-body .comp-compare .cc strong { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .modal-body .comp-compare .cc.olsson strong { color: var(--red); }
+  .modal-body .comp-compare .cc.them strong { color: var(--blue); }
+  .modal-body .comp-compare .cc ul { padding-left: 16px; margin: 0; }
+  .modal-body .comp-compare .cc ul li { font-size: 12.5px; margin-bottom: 4px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .tag { background: var(--light); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; color: var(--slate); }
+  .tag.red { background: rgba(233,50,46,0.08); border-color: rgba(233,50,46,0.25); color: var(--brick); }
+  .tag.green { background: rgba(42,125,79,0.08); border-color: rgba(42,125,79,0.25); color: var(--green); }
+
+  /* ── Roadmap ── */
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
+  @media (max-width: 700px) { .roadmap { grid-template-columns: 1fr; } }
+  .roadmap-col { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .roadmap-col .rm-header {
+    padding: 16px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .roadmap-col:nth-child(1) .rm-header { background: var(--red); }
+  .roadmap-col:nth-child(2) .rm-header { background: var(--amber); }
+  .roadmap-col:nth-child(3) .rm-header { background: var(--blue); }
+  .rm-list { list-style: none; padding: 0; }
+  .rm-list li {
+    padding: 11px 18px;
+    font-size: 12.5px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 9px;
+    line-height: 1.45;
+    color: var(--slate);
+  }
+  .rm-list li:last-child { border-bottom: none; }
+  .rm-list li::before { content: '→'; color: #bbb; flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+  /* ── Gap icon colors ── */
+  .gap-row-card.crit .gap-icon { color: var(--red); }
+  .gap-row-card.warn .gap-icon { color: var(--amber); }
+  .gap-row-card.info .gap-icon { color: var(--blue); }
+
+  /* ── Footer ── */
+  .site-footer {
+    background: var(--charcoal);
+    color: #888;
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 12px;
+    border-top: 3px solid var(--red);
+  }
+  .site-footer strong { color: #ccc; }
+
+  /* ── Scrollbar ── */
+  .modal::-webkit-scrollbar { width: 6px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="logo-group">
+    <div class="header-logo">
+      <svg width="556" height="216" viewBox="0 0 556 216" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 131.941V53.202L70.2266 0V164.926L0 131.941Z" fill="url(#hdr0)"/>
+        <path d="M140.453 131.941V53.202L70.2266 0V164.926L140.453 131.941Z" fill="url(#hdr1)"/>
+        <path d="M0 144.709L70.2266 177.695V216L0 173.438V144.709Z" fill="url(#hdr2)"/>
+        <path d="M140.453 144.709L70.2266 177.695V216L140.453 172.374V144.709Z" fill="url(#hdr3)"/>
+        <path d="M218.971 59.3601C218.971 44.4326 218.369 41.2203 214.756 35.7406C210.341 29.5051 201.913 25.537 192.48 25.537C183.048 25.537 174.62 29.5051 170.204 35.7406C166.592 41.2203 165.99 44.4326 165.99 59.3601V121.338C165.99 136.265 166.592 139.477 170.204 144.957C174.62 151.382 183.048 155.35 192.48 155.35C201.913 155.35 210.341 151.382 214.756 144.957C218.369 139.477 218.971 136.454 218.971 121.338V59.3601ZM200.307 128.707C200.307 135.887 197.899 138.911 192.48 138.911C186.861 138.911 184.654 135.887 184.654 128.707V52.1798C184.654 44.9995 187.062 41.9762 192.48 41.9762C198.1 41.9762 200.307 44.9995 200.307 52.1798V128.707Z" fill="white"/>
+        <path d="M234.588 153.46H279.742V137.021H253.252V27.4265H234.588V153.46Z" fill="white"/>
+        <path d="M290.965 116.992C290.764 120.015 290.764 121.149 290.764 123.794C290.764 134.754 292.169 140.044 296.584 145.713C301.801 152.326 308.825 155.35 318.86 155.35C336.319 155.35 346.153 145.902 346.153 129.085C346.153 118.314 341.336 105.465 332.707 93.5612L323.275 80.7121C310.832 63.1392 310.03 61.4386 310.03 53.6914C310.03 46.1332 312.839 41.9762 317.856 41.9762C322.071 41.9762 325.081 44.8105 325.683 49.9123C326.084 52.5577 326.285 54.8252 326.285 61.2497L344.547 59.5491C344.547 49.1565 344.547 48.5896 343.544 43.8657C340.935 32.3394 331.703 25.537 319.06 25.537C302.203 25.537 291.567 36.1185 291.567 52.7467C291.567 63.8951 295.38 72.587 306.819 88.8373L316.05 101.686C325.282 113.213 327.489 118.125 327.489 126.44C327.489 134.565 324.679 138.911 319.06 138.911C311.836 138.911 309.427 134.754 309.427 121.716V116.236L290.965 116.992Z" fill="white"/>
+        <path d="M358.578 116.992C358.377 120.015 358.377 121.149 358.377 123.794C358.377 134.754 359.782 140.044 364.197 145.713C369.415 152.326 376.439 155.35 386.473 155.35C403.932 155.35 413.766 145.902 413.766 129.085C413.766 118.314 408.95 105.465 400.32 93.5612L390.888 80.7121C378.446 63.1392 377.643 61.4386 377.643 53.6914C377.643 46.1332 380.452 41.9762 385.469 41.9762C389.684 41.9762 392.694 44.8105 393.296 49.9123C393.698 52.5577 393.898 54.8252 393.898 61.2497L412.16 59.5491C412.16 49.1565 412.16 48.5896 411.157 43.8657C408.548 32.3394 399.317 25.537 386.674 25.537C369.816 25.537 359.18 36.1185 359.18 52.7467C359.18 63.8951 362.993 72.587 374.432 88.8373L383.663 101.686C392.895 113.213 395.102 118.125 395.102 126.44C395.102 134.565 392.293 138.911 386.674 138.911C379.449 138.911 377.041 134.754 377.041 121.716V116.236L358.578 116.992Z" fill="white"/>
+        <path d="M480.409 59.3601C480.409 44.4326 479.807 41.2203 476.194 35.7406C471.779 29.5051 463.351 25.537 453.918 25.537C444.486 25.537 436.058 29.5051 431.642 35.7406C428.03 41.2203 427.428 44.4326 427.428 59.3601V121.338C427.428 136.265 428.03 139.477 431.642 144.957C436.058 151.382 444.486 155.35 453.918 155.35C463.351 155.35 471.779 151.382 476.194 144.957C479.807 139.477 480.409 136.454 480.409 121.338V59.3601ZM461.745 128.707C461.745 135.887 459.337 138.911 453.918 138.911C448.299 138.911 446.092 135.887 446.092 128.707V52.1798C446.092 44.9995 448.5 41.9762 453.918 41.9762C459.538 41.9762 461.745 44.9995 461.745 52.1798V128.707Z" fill="white"/>
+        <path d="M555.429 27.4265H536.765V101.686L512.081 27.4265H496.026V153.46H514.69V87.3256L536.765 153.46H555.429V27.4265Z" fill="white"/>
+        <path d="M177.282 185.143L172.302 177.618C174.82 177.397 177.088 175.571 177.088 172.251C177.088 168.848 174.681 166.69 171.306 166.69H163.892V185.143H166.188V177.812H169.867L174.571 185.143H177.282ZM171.029 175.792H166.188V168.738H171.029C173.215 168.738 174.709 170.176 174.709 172.251C174.709 174.326 173.215 175.792 171.029 175.792Z" fill="white"/>
+        <path d="M186.92 185.475C192.37 185.475 196.077 181.38 196.077 175.93C196.077 170.48 192.37 166.386 186.92 166.386C181.442 166.386 177.763 170.48 177.763 175.93C177.763 181.38 181.442 185.475 186.92 185.475ZM186.92 183.428C182.77 183.428 180.142 180.218 180.142 175.93C180.142 171.615 182.77 168.433 186.92 168.433C191.042 168.433 193.698 171.615 193.698 175.93C193.698 180.218 191.042 183.428 186.92 183.428Z" fill="white"/>
+        <path d="M205.861 185.475C211.311 185.475 215.018 181.38 215.018 175.93C215.018 170.48 211.311 166.386 205.861 166.386C200.383 166.386 196.704 170.48 196.704 175.93C196.704 181.38 200.383 185.475 205.861 185.475ZM205.861 183.428C201.711 183.428 199.083 180.218 199.083 175.93C199.083 171.615 201.711 168.433 205.861 168.433C209.983 168.433 212.639 171.615 212.639 175.93C212.639 180.218 209.983 183.428 205.861 183.428Z" fill="white"/>
+        <path d="M218.688 185.143V176.733H228.288V174.685H218.688V168.738H228.481V166.69H216.392V185.143H218.688Z" fill="white"/>
+        <path d="M231.685 185.143V166.69H229.389V185.143H231.685Z" fill="white"/>
+        <path d="M249.066 185.143V166.69H246.77V181.104L236.146 166.69H233.795V185.143H236.091V170.425L246.853 185.143H249.066Z" fill="white"/>
+        <path d="M259.911 185.503C262.926 185.503 265.444 184.23 267.159 182.321V175.654H258.527V177.701H264.863V181.463C263.95 182.376 262.124 183.455 259.911 183.455C255.872 183.455 252.801 180.301 252.801 175.93C252.801 171.532 255.872 168.433 259.911 168.433C262.124 168.433 264.088 169.484 265.25 170.978L267.076 169.844C265.444 167.825 263.175 166.386 259.911 166.386C254.654 166.386 250.422 170.204 250.422 175.93C250.422 181.657 254.654 185.503 259.911 185.503Z" fill="white"/>
+        <path d="M326.666 185.143V166.69H323.374L317.62 180.578L311.893 166.69H308.601V185.143H310.897V169.955L317.15 185.143H318.09L324.37 169.955V185.143H326.666Z" fill="white"/>
+        <path d="M340.847 185.143V183.096H331.054V176.733H340.654V174.685H331.054V168.738H340.847V166.69H328.758V185.143H340.847Z" fill="white"/>
+        <path d="M349.156 185.143V168.738H355.021V166.69H341.023V168.738H346.86V185.143H349.156Z" fill="white"/>
+        <path d="M369.792 185.143L362.35 166.69H359.501L352.087 185.143H354.715L356.347 181.048H365.532L367.164 185.143H369.792ZM364.84 179.001H357.011L360.94 169.07L364.84 179.001Z" fill="white"/>
+        <path d="M380.864 185.143V183.096H372.288V166.69H369.992V185.143H380.864Z" fill="white"/>
+        <path d="M431.621 185.475C436.601 185.475 438.427 182.736 438.427 180.053C438.427 173.164 427.499 175.543 427.499 171.393C427.499 169.65 429.076 168.461 431.289 168.461C433.309 168.461 435.245 169.152 436.629 170.674L438.012 168.986C436.463 167.354 434.277 166.414 431.455 166.414C427.831 166.414 425.12 168.489 425.12 171.532C425.12 178.116 436.048 175.488 436.048 180.246C436.048 181.657 434.996 183.428 431.704 183.428C429.104 183.428 427.112 182.155 425.895 180.799L424.539 182.542C426.061 184.258 428.412 185.475 431.621 185.475Z" fill="white"/>
+        <path d="M448.052 185.475C453.502 185.475 457.21 181.38 457.21 175.93C457.21 170.48 453.502 166.386 448.052 166.386C442.575 166.386 438.895 170.48 438.895 175.93C438.895 181.38 442.575 185.475 448.052 185.475ZM448.052 183.428C443.903 183.428 441.275 180.218 441.275 175.93C441.275 171.615 443.903 168.433 448.052 168.433C452.175 168.433 454.83 171.615 454.83 175.93C454.83 180.218 452.175 183.428 448.052 183.428Z" fill="white"/>
+        <path d="M469.455 185.143V183.096H460.879V166.69H458.583V185.143H469.455Z" fill="white"/>
+        <path d="M477.241 185.475C482.248 185.475 484.766 182.542 484.766 177.95V166.69H482.47V177.922C482.47 181.297 480.644 183.428 477.241 183.428C473.838 183.428 472.012 181.297 472.012 177.922V166.69H469.716V177.978C469.716 182.515 472.234 185.475 477.241 185.475Z" fill="white"/>
+        <path d="M493.735 185.143V168.738H499.6V166.69H485.601V168.738H491.439V185.143H493.735Z" fill="white"/>
+        <path d="M502.735 185.143V166.69H500.438V185.143H502.735Z" fill="white"/>
+        <path d="M513.254 185.475C518.704 185.475 522.412 181.38 522.412 175.93C522.412 170.48 518.704 166.386 513.254 166.386C507.777 166.386 504.097 170.48 504.097 175.93C504.097 181.38 507.777 185.475 513.254 185.475ZM513.254 183.428C509.105 183.428 506.476 180.218 506.476 175.93C506.476 171.615 509.105 168.433 513.254 168.433C517.376 168.433 520.032 171.615 520.032 175.93C520.032 180.218 517.376 183.428 513.254 183.428Z" fill="white"/>
+        <path d="M539.056 185.143V166.69H536.76V181.104L526.137 166.69H523.785V185.143H526.081V170.425L536.843 185.143H539.056Z" fill="white"/>
+        <path d="M547.135 185.475C552.114 185.475 553.94 182.736 553.94 180.053C553.94 173.164 543.012 175.543 543.012 171.393C543.012 169.65 544.589 168.461 546.803 168.461C548.822 168.461 550.759 169.152 552.142 170.674L553.525 168.986C551.976 167.354 549.79 166.414 546.969 166.414C543.344 166.414 540.633 168.489 540.633 171.532C540.633 178.116 551.561 175.488 551.561 180.246C551.561 181.657 550.51 183.428 547.218 183.428C544.617 183.428 542.625 182.155 541.408 180.799L540.052 182.542C541.574 184.258 543.925 185.475 547.135 185.475Z" fill="white"/>
+        <circle cx="288.355" cy="175.567" r="5.3202" fill="#E9322E"/>
+        <circle cx="401.143" cy="175.567" r="5.3202" fill="#E9322E"/>
+        <defs>
+          <linearGradient id="hdr0" x1="35.1133" y1="0" x2="35.1133" y2="164.926" gradientUnits="userSpaceOnUse"><stop stop-color="#E9322E"/><stop offset="1" stop-color="#E9322E"/></linearGradient>
+          <linearGradient id="hdr1" x1="70.2266" y1="94.6995" x2="143.645" y2="94.6995" gradientUnits="userSpaceOnUse"><stop stop-color="#802B26"/><stop offset="0.724881" stop-color="#E9322E"/></linearGradient>
+          <linearGradient id="hdr2" x1="71.2906" y1="195.783" x2="-1.06404" y2="161.734" gradientUnits="userSpaceOnUse"><stop stop-color="#C5C5C5"/><stop offset="1" stop-color="#A1A1A1"/></linearGradient>
+          <linearGradient id="hdr3" x1="75.5468" y1="205.36" x2="142.581" y2="172.374" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#BDBDBD"/></linearGradient>
+        </defs>
+      </svg>
+      <span class="header-logo-sub">Competitive Analysis — 2026</span>
+    </div>
+  </div>
+  <div class="header-badge">Internal Review</div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">AI-Powered Market Intelligence · ChatGPT + Gemini Analysis</div>
+  <h1>Olsson Roofing is a <em>great operator</em><br>with a quiet digital presence</h1>
+  <p class="hero-sub">Two independent AI analyses agree: Olsson holds elite credentials and operational scale, but its website markets them like a legacy contractor while competitors build buyer-journey machines.</p>
+  <div class="verdict-strip">
+    <div class="dot"></div>
+    Overall position: <strong>Operationally elite — digitally underperforming</strong>
+  </div>
+</section>
+
+<!-- Audio Overview -->
+<div style="background:linear-gradient(135deg,#1a0a09 0%,#2d0f0d 40%,#1a1a1a 100%);padding:56px 24px;position:relative;overflow:hidden;border-top:3px solid #E9322E;border-bottom:3px solid #E9322E">
+  <!-- decorative rings -->
+  <div style="position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:400px;height:400px;border-radius:50%;border:1px solid rgba(233,50,46,0.12);pointer-events:none"></div>
+  <div style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:280px;height:280px;border-radius:50%;border:1px solid rgba(233,50,46,0.18);pointer-events:none"></div>
+  <div style="position:absolute;right:20px;top:50%;transform:translateY(-50%);width:160px;height:160px;border-radius:50%;border:1px solid rgba(233,50,46,0.25);pointer-events:none"></div>
+
+  <div style="max-width:820px;margin:0 auto;position:relative;z-index:1">
+    <div style="display:flex;align-items:flex-start;gap:28px">
+
+      <!-- icon block -->
+      <div style="flex-shrink:0;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#E9322E,#802B26);display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px rgba(233,50,46,0.45)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      </div>
+
+      <!-- text + player -->
+      <div style="flex:1;min-width:0">
+        <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#E9322E;margin-bottom:10px">AI Audio Overview · Full Analysis</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:clamp(20px,3.5vw,30px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:10px">Why Olsson Roofing<br>Is Losing Online</div>
+        <div style="font-size:14px;color:#aaa;line-height:1.6;margin-bottom:24px;max-width:540px">A spoken-word summary of the full competitive analysis — key findings, competitor threats, and the exact moves Olsson must make to lead the Chicago market.</div>
+
+        <!-- waveform bars (decorative) -->
+        <div style="display:flex;align-items:center;gap:3px;margin-bottom:16px;height:28px">
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:40%;opacity:0.5"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:80%;opacity:0.7"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:55%;opacity:0.5"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:100%"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:65%;opacity:0.8"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:45%;opacity:0.6"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:90%;opacity:0.9"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:50%;opacity:0.6"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:75%;opacity:0.7"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:35%;opacity:0.4"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:60%;opacity:0.6"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:100%"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:70%;opacity:0.7"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:45%;opacity:0.5"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:85%;opacity:0.8"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:55%;opacity:0.6"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:40%;opacity:0.5"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:70%;opacity:0.7"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:95%;opacity:0.9"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:50%;opacity:0.5"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:65%"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:30%;opacity:0.4"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:80%;opacity:0.8"></div>
+          <div style="width:3px;background:#E9322E;border-radius:2px;height:45%;opacity:0.5"></div>
+        </div>
+
+        <!-- Custom audio player -->
+        <div id="audio-player" style="max-width:560px;background:rgba(255,255,255,0.06);border:1px solid rgba(233,50,46,0.25);border-radius:12px;padding:18px 20px">
+          <audio id="analysis-audio">
+            <source src="https://res.cloudinary.com/dsbllwpbh/video/upload/v1772647436/Why_Olsson_Roofing_is_losing_online-edit_byhlan.mp3" type="audio/mpeg">
+          </audio>
+
+          <!-- Progress bar -->
+          <div id="ap-progress-track" style="width:100%;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;cursor:pointer;margin-bottom:10px;position:relative">
+            <div id="ap-progress-fill" style="height:100%;width:0%;background:#E9322E;border-radius:2px;transition:width 0.1s linear;pointer-events:none"></div>
+            <div id="ap-thumb" style="position:absolute;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#E9322E;left:0%;box-shadow:0 0 6px rgba(233,50,46,0.7);pointer-events:none"></div>
+          </div>
+
+          <!-- Time -->
+          <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+            <span id="ap-current" style="font-size:11px;color:#aaa;font-variant-numeric:tabular-nums">0:00</span>
+            <span id="ap-duration" style="font-size:11px;color:#555;font-variant-numeric:tabular-nums">—:——</span>
+          </div>
+
+          <!-- Controls row -->
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+
+            <!-- Speed selector -->
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button class="ap-speed" data-speed="0.75" style="padding:4px 9px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:#888;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif">0.75×</button>
+              <button class="ap-speed ap-speed-active" data-speed="1" style="padding:4px 9px;border-radius:20px;border:1px solid #E9322E;background:#E9322E;color:#fff;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif">1×</button>
+              <button class="ap-speed" data-speed="1.25" style="padding:4px 9px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:#888;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif">1.25×</button>
+              <button class="ap-speed" data-speed="1.5" style="padding:4px 9px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:#888;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif">1.5×</button>
+              <button class="ap-speed" data-speed="2" style="padding:4px 9px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:#888;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif">2×</button>
+            </div>
+
+            <!-- Playback buttons -->
+            <div style="display:flex;align-items:center;gap:14px">
+              <!-- Skip back 15s -->
+              <button id="ap-back" title="Back 15s" style="background:none;border:none;cursor:pointer;color:#aaa;display:flex;flex-direction:column;align-items:center;gap:2px;transition:color 0.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#aaa'">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
+                <span style="font-size:9px;font-weight:700;letter-spacing:0.04em;font-family:'Inter',sans-serif">15s</span>
+              </button>
+
+              <!-- Play/Pause -->
+              <button id="ap-play" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#E9322E,#802B26);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(233,50,46,0.4);transition:transform 0.15s,box-shadow 0.15s" onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 0 30px rgba(233,50,46,0.6)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 0 20px rgba(233,50,46,0.4)'">
+                <svg id="ap-play-icon" width="20" height="20" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </button>
+
+              <!-- Skip forward 15s -->
+              <button id="ap-fwd" title="Forward 15s" style="background:none;border:none;cursor:pointer;color:#aaa;display:flex;flex-direction:column;align-items:center;gap:2px;transition:color 0.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#aaa'">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.46"/></svg>
+                <span style="font-size:9px;font-weight:700;letter-spacing:0.04em;font-family:'Inter',sans-serif">15s</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            var audio = document.getElementById('analysis-audio');
+            var playBtn = document.getElementById('ap-play');
+            var playIcon = document.getElementById('ap-play-icon');
+            var backBtn = document.getElementById('ap-back');
+            var fwdBtn = document.getElementById('ap-fwd');
+            var fill = document.getElementById('ap-progress-fill');
+            var thumb = document.getElementById('ap-thumb');
+            var track = document.getElementById('ap-progress-track');
+            var current = document.getElementById('ap-current');
+            var duration = document.getElementById('ap-duration');
+            var speedBtns = document.querySelectorAll('.ap-speed');
+
+            var pauseIconSVG = '<rect x="6" y="4" width="4" height="16" fill="#fff"/><rect x="14" y="4" width="4" height="16" fill="#fff"/>';
+            var playIconSVG  = '<polygon points="5 3 19 12 5 21 5 3" fill="#fff"/>';
+
+            function fmt(s) {
+              s = Math.floor(s || 0);
+              return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+            }
+
+            audio.addEventListener('loadedmetadata', function() {
+              duration.textContent = fmt(audio.duration);
+            });
+
+            audio.addEventListener('timeupdate', function() {
+              current.textContent = fmt(audio.currentTime);
+              var pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+              fill.style.width = pct + '%';
+              thumb.style.left = pct + '%';
+            });
+
+            audio.addEventListener('ended', function() {
+              playIcon.innerHTML = playIconSVG;
+            });
+
+            playBtn.addEventListener('click', function() {
+              if (audio.paused) {
+                audio.play();
+                playIcon.innerHTML = pauseIconSVG;
+              } else {
+                audio.pause();
+                playIcon.innerHTML = playIconSVG;
+              }
+            });
+
+            backBtn.addEventListener('click', function() {
+              audio.currentTime = Math.max(0, audio.currentTime - 15);
+            });
+
+            fwdBtn.addEventListener('click', function() {
+              audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 15);
+            });
+
+            track.addEventListener('click', function(e) {
+              var rect = track.getBoundingClientRect();
+              var pct = (e.clientX - rect.left) / rect.width;
+              audio.currentTime = pct * (audio.duration || 0);
+            });
+
+            speedBtns.forEach(function(btn) {
+              btn.addEventListener('click', function() {
+                audio.playbackRate = parseFloat(this.dataset.speed);
+                speedBtns.forEach(function(b) {
+                  b.style.background = 'transparent';
+                  b.style.borderColor = 'rgba(255,255,255,0.18)';
+                  b.style.color = '#888';
+                });
+                this.style.background = '#E9322E';
+                this.style.borderColor = '#E9322E';
+                this.style.color = '#fff';
+              });
+            });
+          })();
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- At-a-Glance Scores -->
+<div class="section">
+  <div class="section-title">At-a-Glance Assessment</div>
+  <div class="section-sub">Click any card for a detailed breakdown</div>
+  <div class="score-grid">
+    <div class="score-card green" onclick="openModal('modal-operations')">
+      <div class="score-num">A+</div>
+      <div class="score-label">Operational Scale</div>
+      <div class="score-hint">Largest commercial roofer in IL</div>
+      <span class="tap-btn tap-btn-green">View Breakdown →</span>
+    </div>
+    <div class="score-card green" onclick="openModal('modal-credentials')">
+      <div class="score-num">A+</div>
+      <div class="score-label">Credentials & Awards</div>
+      <div class="score-hint">Triple Hall of Fame manufacturer</div>
+      <span class="tap-btn tap-btn-green">View Breakdown →</span>
+    </div>
+    <div class="score-card amber" onclick="openModal('modal-conversion')">
+      <div class="score-num">C+</div>
+      <div class="score-label">Website Conversion</div>
+      <div class="score-hint">CTA friction + template bugs</div>
+      <span class="tap-btn tap-btn-amber">View Breakdown →</span>
+    </div>
+    <div class="score-card red" onclick="openModal('modal-content')">
+      <div class="score-num">D</div>
+      <div class="score-label">Content / SEO</div>
+      <div class="score-hint">Last post: June 2023</div>
+      <span class="tap-btn tap-btn-red">View Breakdown →</span>
+    </div>
+    <div class="score-card amber" onclick="openModal('modal-reviews')">
+      <div class="score-num">C</div>
+      <div class="score-label">Social Proof</div>
+      <div class="score-hint">Strong internally; weak externally</div>
+      <span class="tap-btn tap-btn-amber">View Breakdown →</span>
+    </div>
+    <div class="score-card red" onclick="openModal('modal-discovery')">
+      <div class="score-num">D+</div>
+      <div class="score-label">Digital Discovery</div>
+      <div class="score-hint">Map Pack + LSA gaps</div>
+      <span class="tap-btn tap-btn-red">View Breakdown →</span>
+    </div>
+  </div>
+
+  <!-- Diagnosis -->
+  <div class="diagnosis-banner">
+    <p>"Olsson looks like a <em>great operator</em> whose website currently markets them like a <em>quiet legacy contractor</em> — while competitors are packaging similar capabilities into clearer CTAs, more educational SEO, and more buyer-journey structure."</p>
+    <cite>— ChatGPT Competitive Analysis, 2026</cite>
+  </div>
+</div>
+
+<!-- Competitor Table -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">Competitor Landscape</div>
+  <div class="section-sub">Chicagoland commercial roofing — direct competitive set</div>
+  <div class="comp-table-wrap">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Firm</th>
+          <th>Segment</th>
+          <th>CTA/Conversion</th>
+          <th>Content/SEO</th>
+          <th>Review Volume</th>
+          <th>Key Threat to Olsson</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="olsson-row">
+          <td class="firm-name highlight">Olsson Roofing</td>
+          <td><span class="pill pill-red">Union Industrial</span></td>
+          <td><span class="pill pill-amber">Inconsistent</span></td>
+          <td><span class="pill pill-red">Dormant</span></td>
+          <td><span class="pill pill-gray">6 (GAF)</span></td>
+          <td style="color:#888;font-style:italic;">–</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="firm-name">Knickerbocker</td>
+          <td><span class="pill pill-blue">Commercial</span></td>
+          <td><span class="pill pill-green">Excellent</span></td>
+          <td><span class="pill pill-green">Master Guides + Blog</span></td>
+          <td><span class="pill pill-gray">Moderate</span></td>
+          <td>Captures early-stage researchers Olsson misses</td>
+          <td><button class="more-btn" onclick="openModal('modal-knickerbocker')">Details</button></td>
+        </tr>
+        <tr>
+          <td class="firm-name">DCG Roofing</td>
+          <td><span class="pill pill-blue">Commercial</span></td>
+          <td><span class="pill pill-green">Smart form routing</span></td>
+          <td><span class="pill pill-amber">Good</span></td>
+          <td><span class="pill pill-gray">Moderate</span></td>
+          <td>Role-based intake (GC/Owner/Architect) filters leads better</td>
+          <td><button class="more-btn" onclick="openModal('modal-dcg')">Details</button></td>
+        </tr>
+        <tr>
+          <td class="firm-name">Smart Roofing</td>
+          <td><span class="pill pill-blue">High-End Technical</span></td>
+          <td><span class="pill pill-amber">Good</span></td>
+          <td><span class="pill pill-green">Knowledge Moat</span></td>
+          <td><span class="pill pill-green">65+ GAF, 34+ Angi</span></td>
+          <td>Technical education content dominates material-intent search</td>
+          <td><button class="more-btn" onclick="openModal('modal-smart')">Details</button></td>
+        </tr>
+        <tr>
+          <td class="firm-name">Lakeland Exteriors</td>
+          <td><span class="pill pill-blue">Process-Driven</span></td>
+          <td><span class="pill pill-green">3-Step process</span></td>
+          <td><span class="pill pill-green">60+ local landing pages</span></td>
+          <td><span class="pill pill-green">91+ Birdeye 5.0★</span></td>
+          <td>Hyper-local SEO + Roofing School = trust at scale</td>
+          <td><button class="more-btn" onclick="openModal('modal-lakeland')">Details</button></td>
+        </tr>
+        <tr>
+          <td class="firm-name">Apex Exteriors</td>
+          <td><span class="pill pill-blue">Insurance/HOA</span></td>
+          <td><span class="pill pill-amber">Good</span></td>
+          <td><span class="pill pill-amber">Moderate</span></td>
+          <td><span class="pill pill-green">250+ Google 4.8★</span></td>
+          <td>"No subcontractors" + 250 reviews = trust Olsson can't buy</td>
+          <td><button class="more-btn" onclick="openModal('modal-apex')">Details</button></td>
+        </tr>
+        <tr>
+          <td class="firm-name">Sterling / Tecta</td>
+          <td><span class="pill pill-blue">National</span></td>
+          <td><span class="pill pill-amber">Good</span></td>
+          <td><span class="pill pill-green">"Perspectives" content engine</span></td>
+          <td><span class="pill pill-gray">Moderate</span></td>
+          <td>Newsletter + thought leadership steals facility manager mindshare</td>
+          <td><button class="more-btn" onclick="openModal('modal-sterling')">Details</button></td>
+        </tr>
+        <tr>
+          <td class="firm-name">Riddiford</td>
+          <td><span class="pill pill-blue">Chicago Local</span></td>
+          <td><span class="pill pill-green">Full form + flow</span></td>
+          <td><span class="pill pill-green">Geo-targeted ("We've Got Chicago")</span></td>
+          <td><span class="pill pill-gray">Moderate</span></td>
+          <td>Clean local intent SEO Olsson doesn't compete on</td>
+          <td><button class="more-btn" onclick="openModal('modal-riddiford')">Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Strengths vs Gaps -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">Olsson — Strengths vs. Gaps</div>
+  <div class="section-sub">Where Olsson leads, and where it's leaving money on the table</div>
+  <div class="two-col">
+    <div class="sg-card strengths">
+      <div class="sg-header"><span class="sg-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Proven Strengths</div>
+      <ul class="sg-list">
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="item-text"><strong>Triple Hall of Fame status</strong>Carlisle, Firestone/Elevate, Johns Manville — top percentile nationally. No competitor matches this.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="item-text"><strong>Operational scale that's real</strong>4,000+ service calls/year, 51-truck fleet, 1.6M miles/year, 200+ annual projects.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="item-text"><strong>In-house metal fabrication</strong>Romeoville hub is a genuine competitive moat — most competitors outsource this.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="item-text"><strong>Named institutional testimonials</strong>Colliers International (1M sq ft), Northwestern Medicine, Eli's Cheesecake — real proof of enterprise trust.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="item-text"><strong>Employee-only workforce + 110+ year legacy</strong>Zero-crash fleet record, extreme retention, CRCA safety awards validate the culture claim.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="item-text"><strong>Multi-location rapid deployment</strong>Aurora + Cherry Valley + Romeoville enables geographic coverage competitors can't match.</div>
+        </li>
+      </ul>
+    </div>
+    <div class="sg-card gaps">
+      <div class="sg-header"><span class="sg-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Critical Gaps</div>
+      <ul class="sg-list">
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="item-text"><strong>No persistent conversion CTA</strong>Competitors have sticky "Request Quote" in headers. Olsson relies on buried "Schedule…" prompts.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="item-text"><strong>Content appears dormant</strong>Last Stories post: June 2023. Most videos: 2019–2020. This signals inactivity to Google and to prospects.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="item-text"><strong>External review volume gap</strong>6 reviews on GAF vs. 250+ for Apex, 91+ for Lakeland. "Trust island" — only visible to people already on the site.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="item-text"><strong>No role-based buyer journeys</strong>Facility Managers, GCs, and Architects all hit the same generic site. DCG's role-routing converts better.</div>
+        </li>
+        <li>
+          <div class="bullet"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="item-text"><strong>No local SEO landing pages</strong>Zero pages targeting "commercial roof repair Chicago" or "TPO roofing Aurora IL" — Lakeland has 60+.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Gap Analysis Cards -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">5 Strategic Gap Areas</div>
+  <div class="section-sub">From both AI analyses — where the competition is building moats</div>
+  <div class="gap-row-grid">
+    <div class="gap-row-card crit" onclick="openModal('modal-gap-content')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
+      <div class="gap-title">Educational Content Deficiency</div>
+      <div class="gap-body">Smart Roofing's comparison charts and technical posts create a "Knowledge Moat." Olsson's Stories are company-culture focused — great for retention, weak for acquisition.</div>
+      <span class="tap-btn tap-btn-red">Deep Dive →</span>
+    </div>
+    <div class="gap-row-card crit" onclick="openModal('modal-gap-process')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+      <div class="gap-title">Lack of Process Transparency</div>
+      <div class="gap-body">Lakeland's 3-Step Process + Roofing School gives prospects a psychological "easy button." Olsson describes what it does, not how the customer experiences it.</div>
+      <span class="tap-btn tap-btn-red">Deep Dive →</span>
+    </div>
+    <div class="gap-row-card warn" onclick="openModal('modal-gap-reviews')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="gap-title">Review Volume Gap</div>
+      <div class="gap-body">Apex has 250+ Google reviews. Lakeland has 91+ at 5.0 stars. Olsson's institutional testimonials are on-site only — invisible to search discovery.</div>
+      <span class="tap-btn tap-btn-amber">Deep Dive →</span>
+    </div>
+    <div class="gap-row-card warn" onclick="openModal('modal-gap-seo')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <div class="gap-title">Local + AEO Visibility</div>
+      <div class="gap-body">Map Pack + Local Service Ads are where commercial leads start. Competitors use agencies like CinchLocal and Hook Agency. Olsson appears to not compete here yet.</div>
+      <span class="tap-btn tap-btn-amber">Deep Dive →</span>
+    </div>
+    <div class="gap-row-card info" onclick="openModal('modal-gap-journey')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="gap-title">Missing Role-Based Journeys</div>
+      <div class="gap-body">DCG routes leads by Position on Project (Owner/GC/Architect). Olsson serves all buyers identically — losing specificity that closes larger deals.</div>
+      <span class="tap-btn tap-btn-blue">Deep Dive →</span>
+    </div>
+  </div>
+</div>
+
+<!-- Priority Actions -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">Prioritized Recommendations</div>
+  <div class="section-sub">Sequenced by ROI and speed of impact — click any card for full detail</div>
+
+  <div class="tier-block tier-1">
+    <div class="tier-header">
+      <div class="tier-badge">Tier 1 — Do Now</div>
+      <div class="tier-title">Highest ROI / Fastest Wins</div>
+    </div>
+    <div class="action-cards">
+<div class="action-card" onclick="openModal('modal-act-2')">
+        <div class="action-num">02</div>
+        <div class="action-title">Add a dominant, persistent CTA</div>
+        <div class="action-body">One universal "Request Service / Report Leak / Get Estimate" sticky in header and mobile. Smart form that routes by type.</div>
+        <div class="action-tap">Click for full detail →</div>
+      </div>
+      <div class="action-card" onclick="openModal('modal-act-3')">
+        <div class="action-num">03</div>
+        <div class="action-title">Headline what only Olsson can claim</div>
+        <div class="action-body">Lead with 4,000 service calls, largest staff, CRCA safety, triple Hall of Fame. These are moat statistics — own them above the fold.</div>
+        <div class="action-tap">Click for full detail →</div>
+      </div>
+      <div class="action-card" onclick="openModal('modal-act-4')">
+        <div class="action-num">04</div>
+        <div class="action-title">Refresh dormant content blocks</div>
+        <div class="action-body">Stories and Videos look abandoned. Even 2 new posts and date refreshes change how Google (and prospects) perceive activity.</div>
+        <div class="action-tap">Click for full detail →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tier-block tier-2" style="margin-top:32px">
+    <div class="tier-header">
+      <div class="tier-badge">Tier 2 — 4–8 Weeks</div>
+      <div class="tier-title">Competitive Upgrades</div>
+    </div>
+    <div class="action-cards">
+      <div class="action-card" onclick="openModal('modal-act-5')">
+        <div class="action-num">05</div>
+        <div class="action-title">Build SEO landing pages</div>
+        <div class="action-body">Pages targeting "commercial roof repair Chicago," "TPO EPDM roofing Aurora IL," "architectural sheet metal installer" — Lakeland-style geographic coverage.</div>
+        <div class="action-tap">Click for keyword targets →</div>
+      </div>
+      <div class="action-card" onclick="openModal('modal-act-6')">
+        <div class="action-num">06</div>
+        <div class="action-title">Turn galleries into case studies</div>
+        <div class="action-body">Olsson has photos — add narrative: building type, constraints, safety plan, timeline, warranty, and a named client quote. These become sales assets.</div>
+        <div class="action-tap">Click for template →</div>
+      </div>
+      <div class="action-card" onclick="openModal('modal-act-7')">
+        <div class="action-num">07</div>
+        <div class="action-title">Add role-based buyer journeys</div>
+        <div class="action-body">Three distinct paths: Facility/Property Manager · General Contractor · Architect. Each with different proof, CTAs, and language.</div>
+        <div class="action-tap">Click for journey map →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tier-block tier-3" style="margin-top:32px">
+    <div class="tier-header">
+      <div class="tier-badge">Tier 3 — Ongoing</div>
+      <div class="tier-title">Best-in-Class Moat Building</div>
+    </div>
+    <div class="action-cards">
+      <div class="action-card" onclick="openModal('modal-act-8')">
+        <div class="action-num">08</div>
+        <div class="action-title">Maintenance program portal</div>
+        <div class="action-body">Even a simple login + downloadable inspection reports beats most competitors. Position as a service partner, not just a contractor.</div>
+        <div class="action-tap">Click for feature outline →</div>
+      </div>
+      <div class="action-card" onclick="openModal('modal-act-9')">
+        <div class="action-num">09</div>
+        <div class="action-title">Thought leadership engine</div>
+        <div class="action-body">Quarterly "Roof Asset Planning" webinar or PDF guide. Leverage 110 years of data — TCO calculators, lifecycle cost models, winter prep checklists.</div>
+        <div class="action-tap">Click for content plan →</div>
+      </div>
+      <div class="action-card" onclick="openModal('modal-act-10')">
+        <div class="action-num">10</div>
+        <div class="action-title">Full attribution tracking</div>
+        <div class="action-body">GA4 events, call tracking, form attribution, CRM pipeline by channel. Without this, you can't prove ROI or optimize spend.</div>
+        <div class="action-tap">Click for stack →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Marketing Spend -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">Estimated Competitor Marketing Spend</div>
+  <div class="section-sub">Modeled from observed site complexity, agency credits, and Chicago-market benchmarks — nobody publishes their budgets</div>
+
+  <!-- Tier table -->
+  <div class="comp-table-wrap" style="margin-bottom:32px">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Competitor Tier</th>
+          <th>Website Build (one-time)</th>
+          <th>Monthly Spend (avg)</th>
+          <th>Yearly Spend (est)</th>
+          <th>Profile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill pill-gray">Local Specialists</span></td>
+          <td>$2,500 – $10,000</td>
+          <td>$4,500 – $7,500</td>
+          <td>$55k – $90k</td>
+          <td style="font-size:12px;color:var(--mid)">Elens &amp; Maichin, local Batavia/Aurora firms</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-amber">Regional / Multi-City</span></td>
+          <td>$15,000 – $30,000</td>
+          <td>$7,500 – $20,000</td>
+          <td>$120k – $240k</td>
+          <td style="font-size:12px;color:var(--mid)">Knickerbocker, DCG, Bennett &amp; Brosseau, Combined</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-red">Market Dominators</span></td>
+          <td>$50,000 – $200,000+</td>
+          <td>$20,000 – $60,000+</td>
+          <td>$300k – $1M+</td>
+          <td style="font-size:12px;color:var(--mid)">Sterling/Tecta, Riddiford, Apex (peak/storm seasons)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ROI + CPL callout strip -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:40px">
+    <div class="gap-row-card crit" onclick="openModal('modal-spend-roi')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="gap-title">10.5:1 ROI on digital spend</div>
+      <div class="gap-body">A $20k/mo budget likely generates $200k+ monthly revenue for top competitors.</div>
+      <span class="tap-btn tap-btn-red">See the ROI math →</span>
+    </div>
+    <div class="gap-row-card warn" onclick="openModal('modal-spend-cpl')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="gap-title">$320 per qualified commercial lead</div>
+      <div class="gap-body">2026 estimate. Closing 10–15 jobs/month requires serious lead volume investment.</div>
+      <span class="tap-btn tap-btn-amber">See the lead math →</span>
+    </div>
+    <div class="gap-row-card info" onclick="openModal('modal-spend-benchmark')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+      <div class="gap-title">7–12% of revenue is the benchmark</div>
+      <div class="gap-body">Industry standard for "growth mode" marketing spend. What does this mean for Olsson's budget?</div>
+      <span class="tap-btn tap-btn-blue">See budget scenarios →</span>
+    </div>
+    <div class="gap-row-card info" onclick="openModal('modal-spend-split')">
+      <div class="gap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="gap-title">30% LSA · 65% PPC · 5% other</div>
+      <div class="gap-body">Typical budget split for aggressive competitors. Google Local Service Ads + PPC dominate.</div>
+      <span class="tap-btn tap-btn-blue">See budget split →</span>
+    </div>
+  </div>
+
+  <!-- Competitor-by-competitor cards -->
+  <div class="section-title" style="font-size:17px;margin-bottom:6px">Competitor-by-Competitor Estimates</div>
+  <div class="section-sub">Click any card to see build signals and spend scenario breakdown</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:48px">
+
+    <div class="action-card tier-2" style="border-left-color:var(--amber);cursor:pointer" onclick="openModal('modal-spend-knickerbocker')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">Knickerbocker</div>
+        <span class="pill pill-amber" style="flex-shrink:0">Regional</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$12k–$40k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$2.5k–$14k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$30k–$170k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card tier-2" style="border-left-color:var(--red);cursor:pointer" onclick="openModal('modal-spend-riddiford')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">Riddiford</div>
+        <span class="pill pill-red">High Spend</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$25k–$80k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$4k–$25k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$48k–$300k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card tier-2" style="border-left-color:var(--amber);cursor:pointer" onclick="openModal('modal-spend-dcg')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">DCG Roofing</div>
+        <span class="pill pill-amber">Regional</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$15k–$50k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$3k–$16k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$36k–$190k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card tier-2" style="border-left-color:var(--red);cursor:pointer" onclick="openModal('modal-spend-sterling')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">Sterling / Tecta</div>
+        <span class="pill pill-red">High Spend</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$40k–$140k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$5k–$35k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$60k–$420k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card tier-2" style="border-left-color:var(--amber);cursor:pointer" onclick="openModal('modal-spend-a1')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">A-1 Roofing</div>
+        <span class="pill pill-amber">Regional</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$20k–$70k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$3k–$22k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$36k–$265k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card tier-2" style="border-left-color:var(--amber);cursor:pointer" onclick="openModal('modal-spend-combined')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">Combined Roofing</div>
+        <span class="pill pill-amber">Regional</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$18k–$60k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$3k–$18k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$36k–$215k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card tier-2" style="border-left-color:var(--amber);cursor:pointer" onclick="openModal('modal-spend-bennett')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">Bennett &amp; Brosseau</div>
+        <span class="pill pill-amber">Regional</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$15k–$55k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$3k–$15k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$36k–$180k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+    <div class="action-card" style="border-left-color:var(--border);cursor:pointer" onclick="openModal('modal-spend-elens')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div class="action-title" style="margin:0">Elens &amp; Maichin</div>
+        <span class="pill pill-gray">Local</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Build</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$3k–$15k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Monthly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$200–$3k</div>
+        </div>
+        <div style="text-align:center;background:var(--light);border-radius:6px;padding:8px 4px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Yearly</div>
+          <div style="font-size:12px;font-weight:700;color:var(--charcoal)">$2.4k–$36k</div>
+        </div>
+      </div>
+      <div class="action-tap">Click for signals + scenario breakdown →</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Spend Modals -->
+<div class="modal-overlay" id="modal-spend-roi">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Marketing Spend Insight</div>
+        <div class="modal-title">The 10.5:1 ROI on Digital Spend</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-roi')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>The key number:</strong> High-end competitors in the Chicago commercial roofing market achieve an estimated 10.5:1 return on their digital marketing investment.</div>
+      <h3>What This Means in Practice</h3>
+      <p>A competitor spending $20,000/month on SEO, PPC, and Local Service Ads is likely generating approximately <strong>$210,000+ in monthly revenue</strong> directly attributable to digital channels. Over a year, a $240,000 marketing investment compounds into $2.5M+ in digitally-sourced revenue.</p>
+      <h3>Why the ROI Is This High for Commercial Roofing</h3>
+      <ul>
+        <li><strong>High average contract values:</strong> A single commercial reroof can be $500k–$2M+. One closed deal from a digital lead pays for months of spend.</li>
+        <li><strong>Service/repair volume:</strong> 4,000 service calls/year at an average ticket of $2,000–$5,000 each is $8M–$20M in revenue alone — and digital drives emergency service discovery.</li>
+        <li><strong>Maintenance contract stickiness:</strong> A facility manager who finds a roofer via Google tends to stay. LTV of a commercial client is 5–15 years.</li>
+      </ul>
+      <h3>What This Means for Olsson</h3>
+      <p>Olsson already has the operational capacity to absorb more leads — 51 trucks, 200+ annual projects, 4,000 service calls. The constraint isn't delivery; it's <em>digital discovery.</em> Even a conservative 8:1 ROI on a $150k/year digital investment would represent $1.2M in incremental digitally-sourced revenue.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-cpl">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Marketing Spend Insight</div>
+        <div class="modal-title">$320 Per Qualified Commercial Lead</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-cpl')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The Lead Volume Math</h3>
+      <p>At $320 per qualified commercial lead (2026 estimate), closing 10–15 commercial projects per month requires generating <strong>50–100+ qualified leads monthly</strong> — assuming a 15–20% close rate on commercial bids.</p>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative (10 jobs/mo)</strong>
+          <ul>
+            <li>~50 qualified leads needed</li>
+            <li>$16,000/mo in lead generation</li>
+            <li>$192,000/yr lead gen budget</li>
+          </ul>
+        </div>
+        <div class="cc them">
+          <strong>Aggressive (20 jobs/mo)</strong>
+          <ul>
+            <li>~100+ qualified leads needed</li>
+            <li>$32,000/mo in lead generation</li>
+            <li>$384,000/yr lead gen budget</li>
+          </ul>
+        </div>
+      </div>
+      <h3>How to Reduce CPL</h3>
+      <ul>
+        <li><strong>SEO and content:</strong> Organic leads have near-zero marginal cost once content is live. A keyword-ranked page can generate leads for 3–5 years.</li>
+        <li><strong>Review volume:</strong> High review counts reduce paid acquisition costs — Google rewards organic trust signals with better ad Quality Scores.</li>
+        <li><strong>Referral systems:</strong> Facility manager and GC referrals have $0 CPL. Olsson's testimonial network is already primed for this.</li>
+        <li><strong>Email marketing to existing clients:</strong> Quarterly maintenance touches to existing clients have the lowest CPL of any channel for repeat commercial work.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-benchmark">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Marketing Spend Insight</div>
+        <div class="modal-title">Revenue % Benchmarks — What Olsson Should Budget</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-benchmark')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Industry standard:</strong> Commercial contractors in "growth mode" spend 7–12% of gross revenue on marketing. At "maintenance mode," 3–5%.</div>
+      <h3>Implied Budgets by Olsson Revenue Scenario</h3>
+      <ul>
+        <li><strong>$15M revenue @ 5% (maintenance):</strong> $750,000/yr → $62,500/mo</li>
+        <li><strong>$15M revenue @ 8% (growth):</strong> $1,200,000/yr → $100,000/mo</li>
+        <li><strong>$25M revenue @ 7% (growth):</strong> $1,750,000/yr → $145,833/mo</li>
+        <li><strong>$25M revenue @ 10% (aggressive):</strong> $2,500,000/yr → $208,333/mo</li>
+      </ul>
+      <h3>What a $115k/Year "Growth Mode" Agency Plan Covers</h3>
+      <p>A standard annual agency engagement at the $115k/year mark typically includes:</p>
+      <ul>
+        <li>SEO + local landing page build-out ($3,500–$5,000/mo retainer)</li>
+        <li>PPC management fee ($1,500–$2,500/mo)</li>
+        <li>Paid ad spend ($5,000–$8,000/mo)</li>
+        <li>Content production — 2 articles + 1 case study/month</li>
+        <li>Monthly reporting + GA4 attribution</li>
+      </ul>
+      <p>This is the <em>floor</em> for meaningful competitive presence in Chicago. Competitors like Riddiford and Sterling likely exceed this by 2–3x.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-split">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Marketing Spend Insight</div>
+        <div class="modal-title">Budget Split: 30% LSA · 65% PPC · 5% Other</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-split')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>How Aggressive Competitors Allocate Paid Budget</h3>
+      <p>For a $20,000/month paid budget in the Chicago commercial roofing market:</p>
+      <ul>
+        <li><strong>Google Local Service Ads — $6,000/mo (30%):</strong> "Google Guaranteed" badge at the very top of results. Pay per verified lead, not per click. Extremely effective for emergency service calls.</li>
+        <li><strong>Traditional PPC (Google Ads) — $13,000/mo (65%):</strong> Targets commercial intent keywords, retargeting, and competitor brand terms. Includes search + display + remarketing.</li>
+        <li><strong>Other (Bing, LinkedIn, review platforms) — $1,000/mo (5%):</strong> LinkedIn particularly effective for reaching facility managers and property decision-makers in the B2B commercial space.</li>
+      </ul>
+      <h3>Why LSA Matters for Olsson Specifically</h3>
+      <p>Olsson's <strong>4,000+ service calls/year</strong> and <strong>24/7 emergency response</strong> are exactly what LSA buyers are searching for. The "Google Guaranteed" badge directly addresses the trust gap that Olsson has in external reviews. A facility manager searching "emergency roof repair" at 2am will see the LSA listing first — and the Google Guaranteed badge substitutes for review volume in that moment.</p>
+      <h3>Minimum Effective Budget in Chicago</h3>
+      <p>Industry benchmarks suggest $12,000/month is the floor for meaningful paid presence in the Chicago metro for commercial roofing. Below that threshold, ad auction competition from firms spending $20k–$40k/month will effectively push Olsson off the first page.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-knickerbocker">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">Knickerbocker Roofing &amp; Paving</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-knickerbocker')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $12k–$40k &nbsp;·&nbsp; <strong>Monthly:</strong> $2.5k–$14k &nbsp;·&nbsp; <strong>Yearly:</strong> $30k–$170k</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>WordPress platform (<code>/wp-content/…</code> URL structure)</li>
+        <li>Site credit: Thomas Marketing Services</li>
+        <li>Strong resources/guides section — indicates ongoing content investment</li>
+        <li>Persistent "Request Quote" CTA — suggests CRO-focused build</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>WordPress + basic SEO plugin</li><li>No active PPC</li><li>~$2.5k–$4k/mo</li><li>~$30k–$48k/yr</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Competitive</strong>
+          <ul><li>SEO retainer + content</li><li>Light PPC ($3k–$5k ad spend)</li><li>~$7k–$14k/mo</li><li>~$84k–$170k/yr</li></ul>
+        </div>
+      </div>
+      <h3>What Olsson Should Note</h3>
+      <p>Knickerbocker's guides/resources investment is likely their most effective spend — evergreen content that compounds in search rankings over time. Even at the conservative end, their content hub is actively competing for the research-phase leads that Olsson's dormant Stories section is losing.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-riddiford">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">Riddiford Roofing Company</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-riddiford')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $25k–$80k &nbsp;·&nbsp; <strong>Monthly:</strong> $4k–$25k &nbsp;·&nbsp; <strong>Yearly:</strong> $48k–$300k</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Modern, agency-quality marketing site with a clear conversion architecture</li>
+        <li>Agency credit: NWC Media — a specialized digital agency for contractors</li>
+        <li>Full contact form + "Get In Touch" flow on every page</li>
+        <li>"We've Got Chicago Covered" — geo-targeted brand positioning baked into the build</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>NWC Media on retainer</li><li>SEO only, no PPC</li><li>~$4k–$8k/mo</li><li>~$48k–$96k/yr</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Aggressive</strong>
+          <ul><li>Full SEO + PPC package</li><li>$8k–$15k ad spend/mo</li><li>~$15k–$25k/mo</li><li>~$180k–$300k/yr</li></ul>
+        </div>
+      </div>
+      <h3>What Olsson Should Note</h3>
+      <p>Riddiford is explicitly investing in Chicago geographic dominance — their brand positioning and URL structure are optimized for "Chicago roofing" searches. Olsson, headquartered in Aurora, doesn't currently compete for Chicago-specific terms despite serving the entire metro. This is addressable with targeted landing pages.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-dcg">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">DCG Roofing</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-dcg')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $15k–$50k &nbsp;·&nbsp; <strong>Monthly:</strong> $3k–$16k &nbsp;·&nbsp; <strong>Yearly:</strong> $36k–$190k</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Polished brand-quality build — custom design, not templated</li>
+        <li>Sophisticated lead form with "Position on Project" qualification (GC/Architect/Owner)</li>
+        <li>WordPress-like author archive URL structure</li>
+        <li>Investment in CRO-focused form design signals an agency with conversion expertise</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>Agency on retainer, SEO focus</li><li>Minimal paid ads</li><li>~$3k–$6k/mo</li><li>~$36k–$72k/yr</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Competitive</strong>
+          <ul><li>SEO + PPC combo</li><li>$5k–$10k ad spend/mo</li><li>~$10k–$16k/mo</li><li>~$120k–$190k/yr</li></ul>
+        </div>
+      </div>
+      <h3>What Olsson Should Note</h3>
+      <p>DCG's investment in a smart qualifying form likely pays for itself quickly in sales efficiency — fewer unqualified calls, faster routing to the right salesperson. This is an inexpensive upgrade relative to their overall site investment but one of the highest-ROI changes Olsson could make.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-sterling">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">Sterling Commercial Roofing / Tecta America</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-sterling')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $40k–$140k &nbsp;·&nbsp; <strong>Monthly:</strong> $5k–$35k &nbsp;·&nbsp; <strong>Yearly:</strong> $60k–$420k — the highest-spend competitor in the set.</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Higher-end brand experience — custom design, editorial content system ("Perspectives")</li>
+        <li>Client login portal (FCS/IMS) — significant development investment</li>
+        <li>Newsletter signup — indicates ongoing email marketing program</li>
+        <li>Acquisition messaging — corporate communications investment on top of digital</li>
+        <li>National Tecta America backing implies shared marketing infrastructure costs</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>Content + SEO focus</li><li>Leverages national Tecta budget</li><li>~$5k–$12k/mo local</li><li>~$60k–$144k/yr local</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Aggressive</strong>
+          <ul><li>Full national + local stack</li><li>Newsletter + PPC + portal</li><li>~$20k–$35k/mo</li><li>~$240k–$420k/yr</li></ul>
+        </div>
+      </div>
+      <h3>What Olsson Should Note</h3>
+      <p>Sterling's client portal is the single most significant competitive investment in this set. It creates lock-in: once a facility manager's roof history, warranties, and inspection reports live in Sterling's system, switching costs are high. Olsson's equivalent would be a maintenance portal — and Olsson already has the operational data to populate it.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-a1">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">A-1 Roofing</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-a1')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $20k–$70k &nbsp;·&nbsp; <strong>Monthly:</strong> $3k–$22k &nbsp;·&nbsp; <strong>Yearly:</strong> $36k–$265k</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Extensive service and portfolio structure — high page count</li>
+        <li>Specific service programs (maintenance software, service plans)</li>
+        <li>BBB Accreditation prominently displayed as a hero trust element</li>
+        <li>Structured credibility architecture — designed to convert skeptical buyers</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>SEO + content retainer</li><li>No major PPC</li><li>~$3k–$7k/mo</li><li>~$36k–$84k/yr</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Competitive</strong>
+          <ul><li>SEO + PPC + BBB program</li><li>$6k–$12k ad spend/mo</li><li>~$12k–$22k/mo</li><li>~$144k–$265k/yr</li></ul>
+        </div>
+      </div>
+      <h3>What Olsson Should Note</h3>
+      <p>A-1's BBB Accreditation investment (roughly $500–$1,500/year) is disproportionately impactful for its cost. Prospects who don't know either firm will read "BBB Accredited" as a significant quality signal. This is the lowest-cost credibility upgrade available — and one Olsson currently lacks externally.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-combined">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">Combined Roofing Services</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-combined')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $18k–$60k &nbsp;·&nbsp; <strong>Monthly:</strong> $3k–$18k &nbsp;·&nbsp; <strong>Yearly:</strong> $36k–$215k</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Modern site with project gallery pages — visual proof of capacity</li>
+        <li>Awards and achievements section — structured credibility</li>
+        <li>Fairly robust content structure indicating content investment</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>Agency-built, minimal ongoing</li><li>Basic hosting + SEO</li><li>~$3k–$6k/mo</li><li>~$36k–$72k/yr</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Competitive</strong>
+          <ul><li>Active SEO + PPC</li><li>$5k–$10k ad spend/mo</li><li>~$10k–$18k/mo</li><li>~$120k–$215k/yr</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-bennett">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">Bennett &amp; Brosseau Roofing</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-bennett')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $15k–$55k &nbsp;·&nbsp; <strong>Monthly:</strong> $3k–$15k &nbsp;·&nbsp; <strong>Yearly:</strong> $36k–$180k</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Modern site with dated project posts — active but not aggressive publisher</li>
+        <li>Footer credit: Anderson Design — local design agency, not a national roofing specialist</li>
+        <li>Project gallery with some narrative — steps toward case study format</li>
+      </ul>
+      <h3>Three Spend Scenarios</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Conservative</strong>
+          <ul><li>Anderson Design retainer</li><li>Basic SEO only</li><li>~$3k–$5k/mo</li><li>~$36k–$60k/yr</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Competitive</strong>
+          <ul><li>SEO + light PPC</li><li>$4k–$8k ad spend/mo</li><li>~$8k–$15k/mo</li><li>~$96k–$180k/yr</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-spend-elens">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Spend Estimate</div>
+        <div class="modal-title">Elens &amp; Maichin Roofing</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-spend-elens')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Build:</strong> $3k–$15k &nbsp;·&nbsp; <strong>Monthly:</strong> $200–$3k &nbsp;·&nbsp; <strong>Yearly:</strong> $2.4k–$36k — lowest digital investment in the competitive set.</div>
+      <h3>Observed Site Signals</h3>
+      <ul>
+        <li>Older, simpler site design — likely not recently updated</li>
+        <li>Footer credit: The Sterling Group, ©2018 — site has not been rebuilt in 7+ years</li>
+        <li>Minimal content structure, no resources section</li>
+        <li>Low digital investment suggests reliance on relationships and reputation rather than digital acquisition</li>
+      </ul>
+      <h3>Assessment</h3>
+      <p>Elens &amp; Maichin represents the "relationship-first" model that Olsson's current positioning somewhat mirrors — strong operational reputation, minimal digital infrastructure. The key difference: Elens &amp; Maichin is a smaller operation where relationships may suffice. At Olsson's scale, digital visibility becomes critical because the firm is too large to grow purely on referrals and existing relationships.</p>
+      <h3>The Risk for Olsson</h3>
+      <p>If Olsson's digital strategy continues to mirror Elens &amp; Maichin's (minimal investment, relationship-dependent), while competitors like Riddiford and Sterling spend $200k–$420k/year on digital, Olsson risks losing the discovery phase to firms with a fraction of its operational capability.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 90-Day Roadmap -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">90-Day Execution Roadmap</div>
+  <div class="section-sub">Phased approach — from immediate fixes to competitive dominance</div>
+  <div class="roadmap">
+    <div class="roadmap-col">
+      <div class="rm-header">Month 1 — Fix & Activate</div>
+      <ul class="rm-list">
+<li>Add sticky header CTA (Request / Report / Estimate)</li>
+        <li>Rewrite homepage hero with moat statistics</li>
+        <li>Publish 2 new Stories posts</li>
+        <li>Set up Google review request email flow</li>
+        <li>Install GA4 with event tracking</li>
+      </ul>
+    </div>
+    <div class="roadmap-col">
+      <div class="rm-header">Month 2 — Build & Compete</div>
+      <ul class="rm-list">
+        <li>Build 5 SEO landing pages (geo + service type)</li>
+        <li>Convert 3 gallery projects to full case studies</li>
+        <li>Create role-based nav/journey pages (FM / GC / Architect)</li>
+        <li>Add role-based smart contact form routing</li>
+        <li>Begin employee-only + in-house metal content push</li>
+        <li>Claim + optimize Google Business Profile</li>
+        <li>Set up call tracking by source</li>
+      </ul>
+    </div>
+    <div class="roadmap-col">
+      <div class="rm-header">Month 3 — Lead & Sustain</div>
+      <ul class="rm-list">
+        <li>Launch "Facilities Resource Center" (replace Stories)</li>
+        <li>Publish first Roof Asset Planning guide / PDF</li>
+        <li>Begin quarterly "roof walk" video series</li>
+        <li>Explore Local Service Ads (Google Guaranteed)</li>
+        <li>Evaluate maintenance portal MVP</li>
+        <li>Review attribution data + optimize CTAs</li>
+        <li>Plan 60-page local landing page expansion</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <p><strong>Olsson Roofing Company</strong> · Competitive Analysis Review · Prepared March 2026 · Internal Use Only</p>
+  <p style="margin-top:6px">Analysis sources: ChatGPT market deep-dive + Gemini Strategic Market Analysis · Design: Orbis Design / Gary Ricke</p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     MODALS
+═══════════════════════════════════════════ -->
+
+<!-- Score modals -->
+<div class="modal-overlay" id="modal-operations">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Score Breakdown</div>
+        <div class="modal-title">Operational Scale — A+</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-operations')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Why this score is earned:</strong> Olsson's operational numbers are genuinely elite and verifiable — not marketing claims.</div>
+      <h3>The Numbers No Competitor Matches</h3>
+      <ul>
+        <li><strong>4,000+ service requests handled per year</strong> — 24/7 response infrastructure</li>
+        <li><strong>51-truck fleet</strong> driving 1.6 million miles annually — zero crash record</li>
+        <li><strong>200+ major commercial projects per year</strong> across the Midwest</li>
+        <li><strong>Three office locations</strong>: Aurora HQ, Cherry Valley service hub, Romeoville metal fabrication</li>
+        <li><strong>1,000,000 sq ft</strong> roof replacement completed in a five-month winter window (Colliers International)</li>
+        <li><strong>110+ year operating history</strong> since 1914</li>
+      </ul>
+      <h3>The Problem</h3>
+      <p>These numbers are buried in body copy and service pages. They are not leading the homepage. A facility manager doing 5-minute due diligence won't find them fast enough. The stat that Olsson responds to <strong>4,000 calls a year</strong> should be as prominent as the phone number.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-credentials">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Score Breakdown</div>
+        <div class="modal-title">Credentials & Awards — A+</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-credentials')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>Triple Hall of Fame status is rare.</strong> No direct competitor holds this position across all three major manufacturers.</div>
+      <h3>Manufacturer Status at a Glance</h3>
+      <ul>
+        <li><strong>Firestone Building Products:</strong> Platinum Council · Hall of Fame · Master Contractor · Inner Circle of Quality</li>
+        <li><strong>Carlisle-Syntec:</strong> 1,000 Perfect 10's · Hall of Fame · Excellence in Single Ply</li>
+        <li><strong>Johns Manville:</strong> Pinnacle Club · Summit Club</li>
+        <li><strong>CRCA:</strong> Gold Medal Safety Awards (2007 and 2018)</li>
+        <li><strong>GAF:</strong> GoldElite™ Certified · CoatingsPro™ Certified</li>
+      </ul>
+      <h3>What the Carlisle "1,000 Perfect 10's" Means</h3>
+      <p>This quantifies a historical record of <em>perfect inspection scores</em> across thousands of commercial installations — it's an extraordinary data point that most buyers don't know to ask for, but once they see it, it's an immediate shortlist qualifier.</p>
+      <h3>Gap: Credentials Are Checked, Not Explained</h3>
+      <p>The awards page displays logos. It doesn't explain to a non-technical facility manager <em>what each award means for them</em>. A brief "What this means for your roof" blurb under each certification would convert browsers into believers.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-conversion">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Score Breakdown</div>
+        <div class="modal-title">Website Conversion — C+</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-conversion')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>What's Working</h3>
+      <ul>
+        <li>Clear primary lanes on homepage: Service/Repair · Commercial Roofing · Architectural Sheet Metal</li>
+        <li>Emergency repair phone number is prominently displayed (630-892-0449)</li>
+        <li>Real testimonials with specifics (not generic praise)</li>
+        <li>"Get Your Roof Repaired Fast" and "See Your Commercial Roofing Options" buttons exist</li>
+      </ul>
+      <h3>What's Broken</h3>
+      <ul>
+        <li><strong>No persistent "sticky" CTA</strong> — disappears when user scrolls past the hero</li>
+        <li><strong>Metal Edge page has a live template bug:</strong> <code>{'{'}olssonTimeInBusiness{'}'}</code> displays as raw variable text</li>
+        <li>"Schedule…" prompts exist but don't lead to a real form with confirmation</li>
+        <li>No smart form routing — a leaking roof and a new construction bid hit the same generic contact page</li>
+      </ul>
+      <h3>Competitor Comparison</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Olsson Today</strong>
+          <ul><li>Phone number prominent</li><li>Generic "Schedule" prompts</li><li>Single contact page</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Best Practice (DCG + Riddiford)</strong>
+          <ul><li>Sticky "Request Quote" in header</li><li>Role-based form (Owner/GC/Architect)</li><li>Smart routing to right team</li><li>Confirmation + expected response time</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-content">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Score Breakdown</div>
+        <div class="modal-title">Content & SEO — D</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-content')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>This is the highest-risk gap.</strong> Google reads a dormant site as a low-authority site. A prospect who finds a competitor's fresh content will often not look further.</div>
+      <h3>Current State</h3>
+      <ul>
+        <li>Last "Stories" post visible: <strong>June 2023</strong></li>
+        <li>Most video content dates to <strong>2019–2020</strong></li>
+        <li>No blog targeting commercial search intent</li>
+        <li>No service-area landing pages (Chicago, Aurora, Romeoville, etc.)</li>
+        <li>No material-specific pages (TPO, EPDM, PVC, EIFS)</li>
+      </ul>
+      <h3>What Competitors Are Publishing</h3>
+      <ul>
+        <li><strong>Sterling:</strong> "Perspectives" content engine with newsletter signups</li>
+        <li><strong>Knickerbocker:</strong> "Master Guide" style resources — evergreen SEO magnets</li>
+        <li><strong>Lakeland:</strong> 60+ suburb/town landing pages for local "near me" searches</li>
+        <li><strong>Smart Roofing:</strong> Technical comparison tables (Cedar vs. Asphalt vs. Composite) — AI-parseable, answer-engine ready</li>
+      </ul>
+      <h3>High-Impact Content Targets</h3>
+      <ul>
+        <li>"Commercial roof repair Chicago" / "Romeoville" / "Aurora"</li>
+        <li>"Preventative roof maintenance program Illinois"</li>
+        <li>"TPO / EPDM / PVC commercial roofing contractor Chicagoland"</li>
+        <li>"Architectural sheet metal installer Chicago"</li>
+        <li>"Winter roof leak prevention checklist Chicagoland"</li>
+        <li>"When coatings beat replacement — and when they don't"</li>
+        <li>"How to budget roof replacement for 5–10 year capex planning"</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-reviews">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Score Breakdown</div>
+        <div class="modal-title">Social Proof — C</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-reviews')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The "Trust Island" Problem</h3>
+      <p>Olsson's testimonials are high-quality and institutional (Colliers, Northwestern Medicine, Eli's Cheesecake). But they're only visible to someone who is <em>already on the Olsson website.</em> They don't appear in Google search, Google Maps, or Angi — the places where discovery happens.</p>
+      <h3>Review Comparison</h3>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Olsson</strong>
+          <ul><li>6 reviews on GAF (5.0★)</li><li>A+ BBB (not accredited)</li><li>Instagram: modest following</li><li>On-site testimonials: excellent</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>Competitors</strong>
+          <ul><li>Apex: 250+ Google (4.8★)</li><li>Lakeland: 91+ Birdeye (5.0★)</li><li>Smart Roofing: 34+ Angi</li><li>A-1: BBB Accredited badge as hero element</li></ul>
+        </div>
+      </div>
+      <h3>Recommended Actions</h3>
+      <ul>
+        <li>Create an automated post-closeout email sequence asking for Google Maps reviews</li>
+        <li>Ask existing testimonial providers (who clearly had excellent experiences) to post publicly</li>
+        <li>Consider BBB accreditation — even if Olsson doesn't need it, prospects look for it</li>
+        <li>Add external review widget (Google or Birdeye) to homepage so third-party stars are visible without leaving the site</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-discovery">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Score Breakdown</div>
+        <div class="modal-title">Digital Discovery — D+</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-discovery')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>The risk is not quality — it's visibility.</strong> Olsson doesn't appear to compete where commercial leads begin their search in 2026.</div>
+      <h3>The Modern Discovery Chain</h3>
+      <ul>
+        <li><strong>AI answer engines (ChatGPT, Perplexity, Gemini):</strong> Pull from structured, well-formatted content. Narrative-style news posts are harder to parse than comparison tables and structured data.</li>
+        <li><strong>Google Map Pack:</strong> The 3 listings below the map capture the majority of local service clicks. CinchLocal and similar agencies focus almost exclusively on this for roofing clients.</li>
+        <li><strong>Local Service Ads (Google Guaranteed):</strong> Competitors are beginning to use these. They appear above organic results with a "Google Guaranteed" trust badge.</li>
+        <li><strong>Near-me searches:</strong> "Commercial roofing near me" + "emergency roof repair [city]" — Lakeland has pages for 60+ suburbs. Olsson has none.</li>
+      </ul>
+      <h3>What Competitors Are Doing</h3>
+      <ul>
+        <li>Hook Agency, Roofing Webmasters, CinchLocal all specialize in roofing contractor digital growth — mid-market competitors are spending on these</li>
+        <li>Weather-integrated AI predicts storm-season lead volume for proactive ad buys</li>
+        <li>CRM integration gives competitors "Attribution Sovereignty" — they know exactly which channel drives which revenue</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Competitor modals -->
+<div class="modal-overlay" id="modal-knickerbocker">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">Knickerbocker Roofing & Paving</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-knickerbocker')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>What They Do Better</h3>
+      <ul>
+        <li><strong>Obvious "Request Quote" in navigation</strong> — persistent across all pages, never buried</li>
+        <li><strong>"Master Guide" style resources</strong> in their nav — they're capturing researchers before Olsson even gets a chance to be found</li>
+        <li><strong>Blog hub with evergreen SEO content</strong> — commercial roofing guides that answer real buyer questions</li>
+      </ul>
+      <h3>What Olsson Has That Knickerbocker Doesn't</h3>
+      <ul>
+        <li>Triple Hall of Fame manufacturer status</li>
+        <li>4,000+ service requests/year (likely higher volume)</li>
+        <li>In-house architectural metal fabrication</li>
+        <li>Named institutional clients (Colliers, Northwestern Medicine)</li>
+      </ul>
+      <h3>The Lesson for Olsson</h3>
+      <p>Knickerbocker wins the <em>research phase</em> by meeting prospects where they are — educational content that answers questions before they call. Olsson's quality wins at the <em>selection phase</em> — but only if the prospect gets that far. Fix the research phase and Olsson's close rate should increase significantly.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-dcg">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">DCG Roofing</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-dcg')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Their Key Innovation: Role-Based Lead Intake</h3>
+      <p>DCG's contact form asks "Position on Project" — options include General Contractor, Architect, and Owner/Facility Manager. This single field change:</p>
+      <ul>
+        <li>Routes the lead to the right salesperson immediately</li>
+        <li>Signals to the prospect that DCG understands their specific role and concerns</li>
+        <li>Produces higher-quality leads that close faster</li>
+        <li>Gives DCG data on which buyer persona drives the most revenue</li>
+      </ul>
+      <h3>Applying This to Olsson</h3>
+      <p>Olsson serves three distinct buyer types with very different primary concerns:</p>
+      <ul>
+        <li><strong>Facility/Property Manager:</strong> Response time, maintenance programs, reporting transparency</li>
+        <li><strong>General Contractor:</strong> Safety record, schedule certainty, submittal management, EMR</li>
+        <li><strong>Architect:</strong> Metal Edge capabilities, manufacturer details, architectural specifications</li>
+      </ul>
+      <p>A smart form with role selection — routing each to tailored landing content and the right contact — would immediately improve Olsson's lead quality and sales efficiency.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-smart">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">Smart Roofing, Inc.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-smart')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Their Marketing Approach: Technical Consultant Positioning</h3>
+      <p>Smart Roofing positions itself as a consultant first, contractor second. Their site features detailed comparison charts of Cedar Shake vs. Asphalt vs. Composite, technical deep dives on standing seam metal roof locks, and analysis of how Chicagoland climate affects specific wood grades.</p>
+      <h3>Why This Works</h3>
+      <ul>
+        <li>Buyers feel informed, not sold — lower resistance at conversion</li>
+        <li>Technical content dominates material-intent search queries</li>
+        <li>Structured tables are AI-parseable — better AEO performance in ChatGPT and Perplexity</li>
+        <li>Their ESG angle ("We Recycle," eco-friendly white roofs) captures corporate sustainability buyers</li>
+      </ul>
+      <h3>Their Credentials</h3>
+      <ul>
+        <li>Elite "Crown Roofer" status for Ludowici tile and Brava synthetic roofing</li>
+        <li>4.8–4.9 stars with 65+ reviews on GAF and 34+ on Angi</li>
+      </ul>
+      <h3>Olsson's Counter-Move</h3>
+      <p>Olsson has 110 years of actual field data. A "Facilities Knowledge Center" with TCO calculators, maintenance planning tools, and material comparison guides would out-depth Smart Roofing while being backed by real institutional experience.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-lakeland">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">Lakeland Exteriors & Roofing</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-lakeland')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Their Three Competitive Weapons</h3>
+      <p><strong>1. The Lakeland Process (3-Step)</strong> — Contact → Assessment → Estimate. Simple, frictionless, and psychological. Prospects know exactly what to expect before they inquire.</p>
+      <p><strong>2. The Roofing School</strong> — A 4,000 sq ft training facility with a full-time trainer. This is a marketing masterstroke: it solves the labor shortage, positions Lakeland as the "Standard Bearer" of craftsmanship, and generates ongoing PR content.</p>
+      <p><strong>3. Hyper-Local SEO at Scale</strong> — Their footer and service area sections list 60+ specific Chicago suburbs and Wisconsin towns. Each gets a dedicated page targeting local "near me" searches.</p>
+      <h3>Their Review Machine</h3>
+      <p>91+ Birdeye reviews at 5.0 stars. Review carousels and external rating widgets on the homepage provide immediate social proof to new visitors before they've read a single word of copy.</p>
+      <h3>Olsson vs. Lakeland</h3>
+      <p>Lakeland wins on <em>process transparency and local SEO.</em> Olsson wins on <em>enterprise scale and manufacturer credentials.</em> The problem: Lakeland's wins affect the <em>discovery and first impression</em> stages. Olsson's wins only matter if a buyer already knows to look for them.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-apex">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">Apex Exteriors</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-apex')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Their Positioning: Administrative Partner</h3>
+      <p>Apex targets the administrative and logistical pain points of commercial property management — primarily insurance claims and HOA compliance. They're not just a roofer; they're a project manager who handles the "red tape."</p>
+      <h3>Key USPs</h3>
+      <ul>
+        <li><strong>Insurance Advocacy:</strong> In-house insurance claim experts assist owners through storm damage claims — positioning Apex as a legal and logistical partner, not just a contractor</li>
+        <li><strong>"No Subcontractors" policy:</strong> Every worker is a direct employee — powerful trust signal for clients with strict site security and safety requirements</li>
+        <li><strong>HOA Expertise:</strong> Manages the permit process and compliance documentation that stalls many commercial-scale projects</li>
+        <li><strong>BBB Accreditation:</strong> Actively displayed as a trust badge — even if Olsson's quality exceeds Apex's, prospects who don't know either firm will gravitate to the BBB badge</li>
+      </ul>
+      <h3>The 250-Review Moat</h3>
+      <p>250+ Google reviews at 4.8★ means Apex appears credible before a prospect visits their website. Strong presence on Pinterest and Houzz adds visual portfolio reach that Olsson lacks on social platforms.</p>
+      <h3>Olsson's Counter</h3>
+      <p>Olsson already has the "employee-only" workforce — it just isn't marketed as aggressively as Apex's. This is an immediate messaging fix, not a capability gap.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-sterling">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">Sterling Roofing / Tecta America</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-sterling')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Their Content Engine: "Perspectives"</h3>
+      <p>Sterling runs a real editorial content operation called "Perspectives." Unlike a basic blog, this is a thought leadership platform that positions their leadership as industry voices — not just salespeople.</p>
+      <h3>Newsletter Capture</h3>
+      <p>Sterling captures newsletter signups — meaning they build a proprietary audience that competitors (including Olsson) can't reach. When a facility manager is budget-planning six months ahead, Sterling's newsletter keeps them top-of-mind.</p>
+      <h3>National Scale Advantage</h3>
+      <p>As Tecta America, Sterling has national brand backing. However, Olsson can compete on local depth and manufacturer credentials that Tecta-affiliated entities may not hold locally.</p>
+      <h3>The Lesson</h3>
+      <p>Thought leadership compounds over time. Sterling's Perspectives content from three years ago still drives search traffic today. Olsson starting a quarterly "Roof Asset Planning" series now means they start compounding that authority immediately.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-riddiford">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Competitor Deep Dive</div>
+        <div class="modal-title">Riddiford Roofing Company</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-riddiford')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Their Tagline: "We've Got Chicago Covered"</h3>
+      <p>Riddiford frames its entire brand around Chicago geography — a classic local intent SEO play. This makes them the mental shortcut for any Chicago-based facility manager who thinks of roofing.</p>
+      <h3>Conversion Excellence</h3>
+      <p>Riddiford features a full contact form with a clear "Get In Touch" flow — every page has a path to inquiry. This is what the ChatGPT analysis specifically cited as an example Olsson should follow for its CTA structure.</p>
+      <h3>Service Category Clarity</h3>
+      <p>Clean, clearly delineated service categories mean a prospect knows exactly which bucket they fall into. No friction, no ambiguity about whether Riddiford handles their type of project.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Gap Analysis Modals -->
+<div class="modal-overlay" id="modal-gap-content">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Gap Analysis</div>
+        <div class="modal-title">Educational Content Deficiency</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-gap-content')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>The Knowledge Moat:</strong> When a buyer searches "TPO vs EPDM roofing Illinois" and Smart Roofing's comparison chart appears, Olsson is not in the consideration set — regardless of which is actually better.</div>
+      <h3>What the Knowledge Moat Looks Like</h3>
+      <p>Smart Roofing publishes detailed, structured comparison tables and technical guides. These pages answer the exact questions a facility manager types into Google (or now ChatGPT) before they shortlist vendors. By the time they're ready to call, Smart Roofing has already established itself as the "expert" — even if Olsson is operationally superior.</p>
+      <h3>What Olsson's 110 Years of Data Could Produce</h3>
+      <ul>
+        <li>TCO (Total Cost of Ownership) calculators for TPO vs. EPDM vs. PVC</li>
+        <li>"Winter Roof Survival Guide" for Chicagoland facility managers</li>
+        <li>"When Coatings Beat Replacement (And When They Don't)" — decision framework</li>
+        <li>"5-Year Capital Planning for Commercial Roof Assets" — budgeting tool</li>
+        <li>"How to Evaluate a Commercial Roofing Contractor" — helps Olsson score itself</li>
+      </ul>
+      <h3>The AEO Angle</h3>
+      <p>Modern SEO is shifting to Answer Engine Optimization. When someone asks Perplexity or ChatGPT "who is the best commercial roofer in Chicago," the AI pulls from structured, data-rich pages. Narrative news posts don't parse as well as comparison tables and FAQ schema. Olsson needs to rebuild its content architecture around answers, not announcements.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-gap-process">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Gap Analysis</div>
+        <div class="modal-title">Lack of Process Transparency</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-gap-process')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The "Easy Button" Effect</h3>
+      <p>Lakeland's 3-step process (Contact → Assessment → Estimate) does something psychologically powerful: it removes the fear of the unknown. A new procurement officer who has never hired a commercial roofer before knows exactly what will happen and when. Olsson's site describes capabilities, not the customer experience of working with Olsson.</p>
+      <h3>The Olsson Industrial Lifecycle (Proposed)</h3>
+      <p>Given Olsson's scale and sophistication, their version would be more robust than Lakeland's 3-step:</p>
+      <ul>
+        <li><strong>Step 1 — Thermal Drone Assessment:</strong> Non-invasive scan identifies moisture, thermal bridges, and deterioration</li>
+        <li><strong>Step 2 — Detailed Scope + Options:</strong> Written report with recommended system, alternatives, and 5-year capital projection</li>
+        <li><strong>Step 3 — Coordinated Installation:</strong> Dedicated project manager, safety plan, site protection protocols, daily progress updates</li>
+        <li><strong>Step 4 — Manufacturer Inspection + Warranty:</strong> Third-party manufacturer inspection — "1,000 Perfect 10's" standard applied to every project</li>
+        <li><strong>Step 5 — Ongoing Service Partnership:</strong> 24/7 access, annual inspections, maintenance reports in your portal</li>
+      </ul>
+      <p>This isn't just a marketing page — it's a sales tool. When presented to a facility manager, it demonstrates that Olsson has thought through everything they care about.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-gap-reviews">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Gap Analysis</div>
+        <div class="modal-title">Review Volume Gap</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-gap-reviews')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The Math Problem</h3>
+      <p>Olsson has 6 reviews on GAF. Apex has 250+ on Google. Lakeland has 91+ at 5.0 stars. A prospect doing discovery doesn't know that Olsson's 6 institutional testimonials (Colliers, Northwestern Medicine) represent bigger projects than Apex's 250 residential reviews. The number reads as lack of experience.</p>
+      <h3>Why This Happens at Commercial Firms</h3>
+      <p>Commercial clients don't naturally go to Google to leave reviews — they're busy facility managers, not consumers. Olsson has to ask for reviews proactively and make it easy. The testimonials already on the site prove the relationships exist; they just haven't been channeled into public platforms.</p>
+      <h3>A Review Acquisition System</h3>
+      <ul>
+        <li><strong>Post-closeout email sequence:</strong> 3 days after project completion, send a personalized email from the project manager with a direct link to Google review</li>
+        <li><strong>Quarterly maintenance touchpoints:</strong> Service calls and inspections are natural review request moments</li>
+        <li><strong>Retroactive ask:</strong> Contact existing testimonial providers (who clearly had excellent experiences) and ask if they'd post publicly</li>
+        <li><strong>Target platforms:</strong> Google Maps (most important) · Angi · GAF Certified Contractor directory · BBB</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-gap-seo">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Gap Analysis</div>
+        <div class="modal-title">Local + AEO Visibility</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-gap-seo')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box"><strong>The risk:</strong> Olsson doesn't appear to compete in the Google Map Pack or Local Service Ads — the areas that generate the most commercial roofing leads in 2026.</div>
+      <h3>What's Missing</h3>
+      <ul>
+        <li><strong>Google Map Pack optimization:</strong> Olsson's GBP (Google Business Profile) needs to be maximized with photos, service categories, Q&A, regular posts, and review responses</li>
+        <li><strong>Local Service Ads ("Google Guaranteed"):</strong> These appear at the very top of results with a trust badge — competitors are starting to use these</li>
+        <li><strong>No local landing pages:</strong> Lakeland has 60+ suburb pages. "Commercial roofing Aurora IL" and "emergency roof repair Romeoville" should return Olsson as the first result — they're headquartered there</li>
+      </ul>
+      <h3>AEO — Answer Engine Optimization</h3>
+      <p>When facility managers ask ChatGPT, Perplexity, or Google AI Overview "who are the best commercial roofers in Chicago," the answer is assembled from structured, parseable web content — schema markup, comparison tables, FAQ sections, structured data. Olsson's current content format (narrative news, photo galleries) is not AI-friendly.</p>
+      <h3>Quick Wins</h3>
+      <ul>
+        <li>Add FAQ schema to key service pages</li>
+        <li>Create structured comparison tables (Olsson vs. alternatives — positioned as "how to choose")</li>
+        <li>Claim and optimize Aurora + Romeoville + Cherry Valley Google Business Profiles</li>
+        <li>Build 5 local landing pages immediately (Aurora, Chicago, Romeoville, Naperville, Rockford corridor)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-gap-journey">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Gap Analysis</div>
+        <div class="modal-title">Missing Role-Based Journeys</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-gap-journey')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Three Buyers, Three Decisions</h3>
+      <p>A Facility Manager, a General Contractor, and an Architect walk into olssonroofing.com. They all see the same page. But their primary anxieties, proof points, and desired outcomes are completely different.</p>
+      <div class="comp-compare">
+        <div class="cc olsson">
+          <strong>Facility / Property Manager</strong>
+          <ul><li>Response time on emergencies</li><li>Maintenance programs</li><li>Reporting and documentation</li><li>Warranties and follow-through</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>General Contractor</strong>
+          <ul><li>Safety record (EMR)</li><li>Schedule certainty</li><li>Submittals and compliance</li><li>Coordination on active sites</li></ul>
+        </div>
+      </div>
+      <div class="comp-compare" style="margin-top:12px">
+        <div class="cc olsson">
+          <strong>Architect</strong>
+          <ul><li>Metal Edge capabilities</li><li>Material specifications</li><li>Manufacturer relationships</li><li>Architectural detail library</li></ul>
+        </div>
+        <div class="cc them">
+          <strong>What Olsson Shows All Three</strong>
+          <ul><li>Generic homepage</li><li>Same service descriptions</li><li>Same contact form</li><li>Same proof points</li></ul>
+        </div>
+      </div>
+      <h3>The Solution</h3>
+      <p>Three role-based journey pages, each with tailored headline, proof, testimonials, CTA, and form routing. DCG does this well. The nav could include "I am a: Facility Manager · General Contractor · Architect" — each path speaking directly to that buyer's primary concern.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Action Modals -->
+<div class="modal-overlay" id="modal-act-2">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 1 Action · Do Now</div>
+        <div class="modal-title">Add a Dominant, Persistent CTA</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-2')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The Three-Path CTA Architecture</h3>
+      <p>One CTA can't serve all buyers. But one CTA dropdown or smart modal can branch into three paths:</p>
+      <ul>
+        <li><strong>Report a Leak / Emergency:</strong> Routes to phone + same-day response form. Urgency-first, frictionless.</li>
+        <li><strong>Request a Roof Inspection:</strong> Routes to scheduling form with building type, square footage, urgency.</li>
+        <li><strong>Request a Bid / Spec:</strong> Routes to role-based form (FM / GC / Architect) with project details.</li>
+      </ul>
+      <h3>Placement Requirements</h3>
+      <ul>
+        <li>Sticky desktop header — always visible on scroll</li>
+        <li>Mobile sticky bottom bar — accessible with one thumb</li>
+        <li>End of every service page — captures readers who reached the bottom</li>
+        <li>Hero section — primary above-fold action</li>
+      </ul>
+      <h3>What to Say on the Button</h3>
+      <p>Avoid generic "Contact Us." Test: <strong>"Get a Roof Assessment"</strong> or <strong>"Report a Leak — We Respond 24/7"</strong> as situational CTAs. The second one speaks directly to the emergency buyer — Olsson's fastest-converting lead type.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-3">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 1 Action · Do Now</div>
+        <div class="modal-title">Headline What Only Olsson Can Claim</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-3')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The Moat Statistics</h3>
+      <p>These numbers are either unique to Olsson or near-impossible for competitors to match. They belong above the fold on the homepage, not buried in body copy:</p>
+      <div class="tag-row">
+        <span class="tag red">4,000+ service calls/year</span>
+        <span class="tag red">110+ years (est. 1914)</span>
+        <span class="tag red">Triple Hall of Fame</span>
+        <span class="tag red">51-truck fleet</span>
+        <span class="tag red">1.6M miles, zero crashes</span>
+        <span class="tag red">24/7 response</span>
+        <span class="tag green">Largest commercial roofer in Illinois</span>
+        <span class="tag green">200+ annual projects</span>
+        <span class="tag green">Employee-only workforce</span>
+        <span class="tag green">In-house metal fabrication</span>
+      </div>
+      <h3>Proposed Homepage Hero Rewrite</h3>
+      <p><em>"Illinois' largest commercial roofing company — and the only one to hold manufacturer Hall of Fame status with Carlisle, Firestone, and Johns Manville. 4,000 service calls answered last year, 24 hours a day."</em></p>
+      <h3>Supporting Proof Block</h3>
+      <p>A 4-stat bar beneath the hero: <strong>110+ Years · 4,000+ Calls/Year · Triple Hall of Fame · 51-Truck Fleet.</strong> Numbers this specific signal real operational scale — not just marketing language.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-4">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 1 Action · Do Now</div>
+        <div class="modal-title">Refresh Dormant Content Blocks</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-4')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box">A June 2023 publish date on the Stories page and 2019–2020 videos signal "nobody's home" to both Google's crawlers and to any prospect doing due diligence.</div>
+      <h3>Quick Wins (This Week)</h3>
+      <ul>
+        <li>Publish one new Stories post — doesn't have to be long. A project completion photo + 3 paragraphs resets the "last updated" signal.</li>
+        <li>Update video page: even adding a header like "2024–2025 Project Highlights" (pending) changes the perception</li>
+        <li>Add timestamps or year indicators to show recency</li>
+      </ul>
+      <h3>Structural Fix (1–2 Weeks)</h3>
+      <ul>
+        <li>Rename "Stories" → <strong>"Facilities Resource Center"</strong> — changes the purpose from internal culture to external value</li>
+        <li>Reorganize into categories: <em>Industry Insights · Project Spotlights · Safety & Compliance · Maintenance Guides</em></li>
+        <li>Set a publishing calendar: 2 posts/month minimum. Even short posts maintain Google activity signals.</li>
+      </ul>
+      <h3>Video Strategy Reset</h3>
+      <ul>
+        <li>6–12 short "roof walk" clips per year — inspection POV, drone surveys, completion walk-throughs</li>
+        <li>Short-form (60–90 seconds) works on both website and social repurposing</li>
+        <li>Each video adds an indexed page to the site with new content</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-5">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 2 Action · 4–8 Weeks</div>
+        <div class="modal-title">Build SEO Landing Pages</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-5')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Priority Keyword Targets</h3>
+      <p><strong>Geographic + Service Combos (High Commercial Intent):</strong></p>
+      <ul>
+        <li>Commercial roof repair Chicago</li>
+        <li>Commercial roofing contractor Aurora IL</li>
+        <li>Emergency roof repair Romeoville IL</li>
+        <li>Preventative roof maintenance program Illinois</li>
+        <li>Commercial roof replacement Chicagoland</li>
+      </ul>
+      <p><strong>Material + Technical Intent:</strong></p>
+      <ul>
+        <li>TPO commercial roofing contractor Illinois</li>
+        <li>EPDM roof replacement Chicago</li>
+        <li>PVC roofing system contractor Illinois</li>
+        <li>Architectural sheet metal installer Chicago</li>
+        <li>Green roof installation Illinois</li>
+      </ul>
+      <p><strong>Vertical/Industry Intent:</strong></p>
+      <ul>
+        <li>Industrial facility roofing contractor Illinois</li>
+        <li>Data center roofing contractor (pharmaceutical, Abbott, AbbVie experience)</li>
+        <li>Healthcare facility roofing contractor Chicago</li>
+      </ul>
+      <h3>Page Architecture</h3>
+      <p>Each page: geo-specific H1 → local proof (project in that city) → relevant service description → manufacturer credentials → CTA → local contact info. 500–800 words minimum for indexability.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-6">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 2 Action · 4–8 Weeks</div>
+        <div class="modal-title">Turn Galleries into Case Studies</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-6')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Case Study Template for Olsson</h3>
+      <p>Every completed project photo gallery should become a structured case study page:</p>
+      <ul>
+        <li><strong>Client:</strong> Name (or "National food manufacturer, Chicago suburbs" if confidential)</li>
+        <li><strong>Building:</strong> Type, size (square footage), age, use case</li>
+        <li><strong>Challenge:</strong> What was failing and why it was complex</li>
+        <li><strong>Constraints:</strong> Active facility, cold weather, tight timeline, hazmat protocols</li>
+        <li><strong>Solution:</strong> System specified, manufacturer, why this was chosen</li>
+        <li><strong>Safety plan:</strong> Protocols, crew size, EMR considerations</li>
+        <li><strong>Timeline:</strong> Start to finish, any accelerated delivery</li>
+        <li><strong>Warranty outcome:</strong> Manufacturer inspection result, warranty issued</li>
+        <li><strong>Client quote:</strong> Named testimonial with title and company</li>
+      </ul>
+      <h3>Priority Projects to Convert</h3>
+      <ul>
+        <li>Colliers International — 1,000,000 sq ft in five months. This should be the flagship case study.</li>
+        <li>Northwestern Medicine Delnor Hospital — healthcare sensitivity and safety protocols</li>
+        <li>Eli's Cheesecake Company — food production facility, active operations</li>
+        <li>Cord Construction / leak-detection win — diagnostic expertise story</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-7">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 2 Action · 4–8 Weeks</div>
+        <div class="modal-title">Add Role-Based Buyer Journeys</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-7')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Journey 1: Facility / Property Manager</h3>
+      <p>Lead with: <em>"Your roof is your biggest maintenance liability. Here's how Olsson makes it your most reliable asset."</em></p>
+      <ul><li>Response time guarantees (24/7)</li><li>Maintenance program overview</li><li>Reporting and documentation portal</li><li>Testimonials from FMs and Directors of Operations</li><li>CTA: "Set Up a Roof Assessment"</li></ul>
+      <h3>Journey 2: General Contractor</h3>
+      <p>Lead with: <em>"We've worked on the most sensitive projects in Illinois. Our safety record and schedule discipline are your risk management."</em></p>
+      <ul><li>CRCA safety awards, EMR, zero-crash fleet</li><li>Submittal management process</li><li>200+ annual project track record</li><li>GC testimonials (Cord Construction, Bulley & Andrews)</li><li>CTA: "Request a Bid Package"</li></ul>
+      <h3>Journey 3: Architect</h3>
+      <p>Lead with: <em>"From Carlisle single-ply to architectural metal wall systems — specified by Olsson, fabricated in-house, installed by our own crews."</em></p>
+      <ul><li>Metal Edge / Romeoville fabrication hub</li><li>Manufacturer spec libraries and details</li><li>Triple Hall of Fame certification depth</li><li>Architectural project gallery (Metal Edge focus)</li><li>CTA: "Download Specification Resources"</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-8">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 3 Action · Ongoing</div>
+        <div class="modal-title">Maintenance Program Portal</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-8')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box">Even a simple client login with downloadable inspection reports beats most competitors and transforms Olsson from a vendor into a long-term infrastructure partner.</div>
+      <h3>MVP Feature Set (Phase 1)</h3>
+      <ul>
+        <li>Client login with project history</li>
+        <li>Downloadable inspection reports (PDF)</li>
+        <li>Warranty documentation storage</li>
+        <li>Upcoming maintenance schedule</li>
+        <li>One-click emergency service request</li>
+      </ul>
+      <h3>Phase 2 (Differentiation)</h3>
+      <ul>
+        <li>Roof health dashboard with condition ratings by zone</li>
+        <li>Budget projection tool (5-year capex planning)</li>
+        <li>Photo documentation with date/time stamps per inspection</li>
+        <li>Integration with facility management platforms (ServiceNow, FM:Systems)</li>
+      </ul>
+      <h3>Marketing Value</h3>
+      <p>The portal becomes a retention tool (clients don't leave when their roof history is stored with you) and a sales tool (demo the portal to prospects during the bid stage — no competitor has this).</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-9">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 3 Action · Ongoing</div>
+        <div class="modal-title">Thought Leadership Engine</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-9')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>The Core Asset: 110 Years of Field Data</h3>
+      <p>Olsson has data no competitor has — over a century of roof performance, weather patterns, system lifecycles, and maintenance outcomes. This should be the foundation of a content and thought leadership strategy that's impossible to replicate.</p>
+      <h3>Quarterly Content Pillars</h3>
+      <ul>
+        <li><strong>Q1 (January):</strong> "Winter Roof Performance Report — What We See After 4,000 Service Calls"</li>
+        <li><strong>Q2 (April):</strong> "Spring Roof Assessment Checklist for Facility Managers"</li>
+        <li><strong>Q3 (July):</strong> "Mid-Year Capex Planning — Roof Asset Budget Guide"</li>
+        <li><strong>Q4 (October):</strong> "Preparing Your Roof for Winter — Inspection Protocol"</li>
+      </ul>
+      <h3>Lead Magnets</h3>
+      <ul>
+        <li>PDF: "5-Year Commercial Roof Capital Planning Workbook"</li>
+        <li>Tool: TCO Calculator (TPO vs. EPDM vs. PVC vs. Metal)</li>
+        <li>Checklist: "What to Look for When Evaluating a Commercial Roofing Contractor"</li>
+        <li>Webinar: "Roof Asset Planning for Illinois Facility Managers" (quarterly)</li>
+      </ul>
+      <h3>Distribution</h3>
+      <p>Newsletter to existing clients and opt-in prospects → LinkedIn posts → CRCA and BOMA event distribution → local business press (Crain's Chicago)</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-act-10">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-eyebrow">Tier 3 Action · Ongoing</div>
+        <div class="modal-title">Full Attribution Tracking Stack</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-act-10')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <h3>Why This Is Critical</h3>
+      <p>Without attribution tracking, Olsson can't answer: "Which marketing investment drives the most revenue?" Competitors using agencies like Hook Agency and CinchLocal have CRM-integrated attribution — they know precisely which channel, which keyword, and which campaign generates each dollar of revenue.</p>
+      <h3>Recommended Stack</h3>
+      <ul>
+        <li><strong>GA4:</strong> Full event tracking — form submissions, phone number clicks, CTA engagements, page depth, scroll depth</li>
+        <li><strong>Call Tracking:</strong> Dynamic number insertion by traffic source (CallRail or similar) — know which calls came from Google organic vs. paid vs. direct</li>
+        <li><strong>Form Attribution:</strong> UTM parameter capture on all form submissions — carried through to CRM</li>
+        <li><strong>CRM Integration:</strong> Pipeline by channel — from first touchpoint to signed contract. HubSpot or Salesforce at minimum.</li>
+        <li><strong>Google Search Console:</strong> Monitor which search queries bring traffic, identify content gap opportunities</li>
+      </ul>
+      <h3>Immediate Win</h3>
+      <p>Even just adding GA4 event tracking to the existing contact forms this week would give Olsson more conversion data than they likely have today — at no cost.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- JavaScript -->
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => {
+        m.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+</body>
+</html>
